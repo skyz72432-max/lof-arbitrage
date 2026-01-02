@@ -6,4 +6,5 @@ streamlit>=1.28.0
 plotly>=5.17.0
 numpy>=1.24.0
 openpyxl>=3.1.0
+akshare>=1.17.73
 pandas_market_calendars>=5.2.3
