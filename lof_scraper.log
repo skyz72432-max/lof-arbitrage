@@ -1,0 +1,235 @@
+2025-07-19 10:09:38,809 - __main__ - INFO - Starting full sync...
+2025-07-19 10:09:38,810 - __main__ - INFO - Full sync completed: 0 records for 0 codes
+2025-07-19 10:10:40,124 - asyncio - DEBUG - Using selector: EpollSelector
+2025-07-19 10:10:40,125 - __main__ - INFO - Starting full sync...
+2025-07-19 10:10:40,125 - __main__ - INFO - Full sync completed: 0 records for 0 codes
+2025-07-19 10:25:06,455 - __main__ - INFO - Starting incremental sync...
+2025-07-19 10:25:06,456 - __main__ - INFO - Incremental sync completed: 0 records for 0 codes
+2025-07-19 10:31:12,872 - __main__ - INFO - Starting full sync...
+2025-07-19 10:31:12,872 - scraper - INFO - Fetching historical data for 161126
+2025-07-19 10:31:12,976 - __main__ - ERROR - Failed to sync 161126: Connection closed
+2025-07-19 10:31:12,977 - scraper - INFO - Fetching historical data for 501312
+2025-07-19 10:31:13,409 - __main__ - ERROR - Failed to sync 501312: Connection closed
+2025-07-19 10:31:13,409 - scraper - INFO - Fetching historical data for 164906
+2025-07-19 10:31:13,902 - __main__ - ERROR - Failed to sync 164906: Connection closed
+2025-07-19 10:31:13,902 - scraper - INFO - Fetching historical data for 161128
+2025-07-19 10:31:14,407 - __main__ - ERROR - Failed to sync 161128: Connection closed
+2025-07-19 10:31:14,408 - scraper - INFO - Fetching historical data for 501300
+2025-07-19 10:31:14,914 - __main__ - ERROR - Failed to sync 501300: Connection closed
+2025-07-19 10:31:14,915 - scraper - INFO - Fetching historical data for 160644
+2025-07-19 10:31:15,406 - __main__ - ERROR - Failed to sync 160644: Connection closed
+2025-07-19 10:31:15,406 - scraper - INFO - Fetching historical data for 161127
+2025-07-19 10:31:15,910 - __main__ - ERROR - Failed to sync 161127: Connection closed
+2025-07-19 10:31:15,910 - scraper - INFO - Fetching historical data for 161125
+2025-07-19 10:31:16,414 - __main__ - ERROR - Failed to sync 161125: Connection closed
+2025-07-19 10:31:16,414 - scraper - INFO - Fetching historical data for 161130
+2025-07-19 10:31:16,914 - __main__ - ERROR - Failed to sync 161130: Connection closed
+2025-07-19 10:31:16,914 - scraper - INFO - Fetching historical data for 160140
+2025-07-19 10:31:17,412 - __main__ - ERROR - Failed to sync 160140: Connection closed
+2025-07-19 10:31:17,413 - scraper - INFO - Fetching historical data for 162415
+2025-07-19 10:31:17,918 - __main__ - ERROR - Failed to sync 162415: Connection closed
+2025-07-19 10:31:17,918 - scraper - INFO - Fetching historical data for 501225
+2025-07-19 10:31:18,414 - __main__ - ERROR - Failed to sync 501225: Connection closed
+2025-07-19 10:31:18,415 - scraper - INFO - Fetching historical data for 164824
+2025-07-19 10:31:18,918 - __main__ - ERROR - Failed to sync 164824: Connection closed
+2025-07-19 10:31:18,918 - scraper - INFO - Fetching historical data for 160125
+2025-07-19 10:31:19,414 - __main__ - ERROR - Failed to sync 160125: Connection closed
+2025-07-19 10:31:19,414 - scraper - INFO - Fetching historical data for 161129
+2025-07-19 10:31:19,921 - __main__ - ERROR - Failed to sync 161129: Connection closed
+2025-07-19 10:31:19,921 - scraper - INFO - Fetching historical data for 501018
+2025-07-19 10:31:20,425 - __main__ - ERROR - Failed to sync 501018: Connection closed
+2025-07-19 10:31:20,425 - scraper - INFO - Fetching historical data for 162411
+2025-07-19 10:31:20,924 - __main__ - ERROR - Failed to sync 162411: Connection closed
+2025-07-19 10:31:20,924 - scraper - INFO - Fetching historical data for 165513
+2025-07-19 10:31:21,424 - __main__ - ERROR - Failed to sync 165513: Connection closed
+2025-07-19 10:31:21,424 - scraper - INFO - Fetching historical data for 161116
+2025-07-19 10:31:21,925 - __main__ - ERROR - Failed to sync 161116: Connection closed
+2025-07-19 10:31:21,925 - scraper - INFO - Fetching historical data for 161815
+2025-07-19 10:31:22,427 - __main__ - ERROR - Failed to sync 161815: Connection closed
+2025-07-19 10:31:22,427 - scraper - INFO - Fetching historical data for 160216
+2025-07-19 10:31:22,930 - __main__ - ERROR - Failed to sync 160216: Connection closed
+2025-07-19 10:31:22,930 - scraper - INFO - Fetching historical data for 161124
+2025-07-19 10:31:23,430 - __main__ - ERROR - Failed to sync 161124: Connection closed
+2025-07-19 10:31:23,430 - scraper - INFO - Fetching historical data for 501307
+2025-07-19 10:31:23,932 - __main__ - ERROR - Failed to sync 501307: Connection closed
+2025-07-19 10:31:23,932 - scraper - INFO - Fetching historical data for 501306
+2025-07-19 10:31:24,431 - __main__ - ERROR - Failed to sync 501306: Connection closed
+2025-07-19 10:31:24,431 - scraper - INFO - Fetching historical data for 501305
+2025-07-19 10:31:24,931 - __main__ - ERROR - Failed to sync 501305: Connection closed
+2025-07-19 10:31:24,931 - scraper - INFO - Fetching historical data for 164705
+2025-07-19 10:31:25,434 - __main__ - ERROR - Failed to sync 164705: Connection closed
+2025-07-19 10:31:25,435 - scraper - INFO - Fetching historical data for 501025
+2025-07-19 10:31:25,932 - __main__ - ERROR - Failed to sync 501025: Connection closed
+2025-07-19 10:31:25,932 - scraper - INFO - Fetching historical data for 501310
+2025-07-19 10:31:26,437 - __main__ - ERROR - Failed to sync 501310: Connection closed
+2025-07-19 10:31:26,437 - scraper - INFO - Fetching historical data for 501311
+2025-07-19 10:31:26,936 - __main__ - ERROR - Failed to sync 501311: Connection closed
+2025-07-19 10:31:26,937 - scraper - INFO - Fetching historical data for 501303
+2025-07-19 10:31:27,437 - __main__ - ERROR - Failed to sync 501303: Connection closed
+2025-07-19 10:31:27,437 - scraper - INFO - Fetching historical data for 501021
+2025-07-19 10:31:27,938 - __main__ - ERROR - Failed to sync 501021: Connection closed
+2025-07-19 10:31:27,938 - scraper - INFO - Fetching historical data for 160322
+2025-07-19 10:31:28,440 - __main__ - ERROR - Failed to sync 160322: Connection closed
+2025-07-19 10:31:28,440 - scraper - INFO - Fetching historical data for 501302
+2025-07-19 10:31:28,938 - __main__ - ERROR - Failed to sync 501302: Connection closed
+2025-07-19 10:31:28,938 - scraper - INFO - Fetching historical data for 161831
+2025-07-19 10:31:29,439 - __main__ - ERROR - Failed to sync 161831: Connection closed
+2025-07-19 10:31:29,439 - scraper - INFO - Fetching historical data for 160924
+2025-07-19 10:31:29,941 - __main__ - ERROR - Failed to sync 160924: Connection closed
+2025-07-19 10:31:29,941 - scraper - INFO - Fetching historical data for 501301
+2025-07-19 10:31:30,442 - __main__ - ERROR - Failed to sync 501301: Connection closed
+2025-07-19 10:31:30,442 - scraper - INFO - Fetching historical data for 160717
+2025-07-19 10:31:30,945 - __main__ - ERROR - Failed to sync 160717: Connection closed
+2025-07-19 10:31:30,946 - __main__ - INFO - Full sync completed: 0 records for 0 codes
+2025-07-22 19:57:22,577 - __main__ - INFO - Starting incremental sync...
+2025-07-22 19:57:22,578 - scraper - INFO - Fetching historical data for 161126
+2025-07-22 19:57:22,723 - __main__ - ERROR - Failed to sync 161126: Connection closed
+2025-07-22 19:57:22,723 - scraper - INFO - Fetching historical data for 501312
+2025-07-22 19:57:23,204 - __main__ - ERROR - Failed to sync 501312: Connection closed
+2025-07-22 19:57:23,204 - scraper - INFO - Fetching historical data for 164906
+2025-07-22 19:57:23,624 - __main__ - ERROR - Failed to sync 164906: Connection closed
+2025-07-22 19:57:23,624 - scraper - INFO - Fetching historical data for 161128
+2025-07-22 19:57:24,124 - __main__ - ERROR - Failed to sync 161128: Connection closed
+2025-07-22 19:57:24,125 - scraper - INFO - Fetching historical data for 501300
+2025-07-22 19:57:24,627 - __main__ - ERROR - Failed to sync 501300: Connection closed
+2025-07-22 19:57:24,627 - scraper - INFO - Fetching historical data for 160644
+2025-07-22 19:57:25,124 - __main__ - ERROR - Failed to sync 160644: Connection closed
+2025-07-22 19:57:25,124 - scraper - INFO - Fetching historical data for 161127
+2025-07-22 19:57:25,624 - __main__ - ERROR - Failed to sync 161127: Connection closed
+2025-07-22 19:57:25,625 - scraper - INFO - Fetching historical data for 161125
+2025-07-22 19:57:26,129 - __main__ - ERROR - Failed to sync 161125: Connection closed
+2025-07-22 19:57:26,130 - scraper - INFO - Fetching historical data for 161130
+2025-07-22 19:57:26,626 - __main__ - ERROR - Failed to sync 161130: Connection closed
+2025-07-22 19:57:26,627 - scraper - INFO - Fetching historical data for 160140
+2025-07-22 19:57:27,126 - __main__ - ERROR - Failed to sync 160140: Connection closed
+2025-07-22 19:57:27,126 - scraper - INFO - Fetching historical data for 162415
+2025-07-22 19:57:27,629 - __main__ - ERROR - Failed to sync 162415: Connection closed
+2025-07-22 19:57:27,630 - scraper - INFO - Fetching historical data for 501225
+2025-07-22 19:57:28,131 - __main__ - ERROR - Failed to sync 501225: Connection closed
+2025-07-22 19:57:28,132 - scraper - INFO - Fetching historical data for 164824
+2025-07-22 19:57:28,629 - __main__ - ERROR - Failed to sync 164824: Connection closed
+2025-07-22 19:57:28,631 - scraper - INFO - Fetching historical data for 160125
+2025-07-22 19:57:29,156 - __main__ - ERROR - Failed to sync 160125: Connection closed
+2025-07-22 19:57:29,156 - scraper - INFO - Fetching historical data for 161129
+2025-07-22 19:57:29,669 - __main__ - ERROR - Failed to sync 161129: Connection closed
+2025-07-22 19:57:29,669 - scraper - INFO - Fetching historical data for 501018
+2025-07-22 19:57:30,134 - __main__ - ERROR - Failed to sync 501018: Connection closed
+2025-07-22 19:57:30,135 - scraper - INFO - Fetching historical data for 162411
+2025-07-22 19:57:30,661 - __main__ - ERROR - Failed to sync 162411: Connection closed
+2025-07-22 19:57:30,661 - scraper - INFO - Fetching historical data for 165513
+2025-07-22 19:57:31,135 - __main__ - ERROR - Failed to sync 165513: Connection closed
+2025-07-22 19:57:31,136 - scraper - INFO - Fetching historical data for 161116
+2025-07-22 19:57:31,636 - __main__ - ERROR - Failed to sync 161116: Connection closed
+2025-07-22 19:57:31,636 - scraper - INFO - Fetching historical data for 161815
+2025-07-22 19:57:32,202 - __main__ - ERROR - Failed to sync 161815: Connection closed
+2025-07-22 19:57:32,203 - scraper - INFO - Fetching historical data for 160216
+2025-07-22 19:57:32,644 - __main__ - ERROR - Failed to sync 160216: Connection closed
+2025-07-22 19:57:32,645 - scraper - INFO - Fetching historical data for 161124
+2025-07-22 19:57:33,141 - __main__ - ERROR - Failed to sync 161124: Connection closed
+2025-07-22 19:57:33,142 - scraper - INFO - Fetching historical data for 501307
+2025-07-22 19:57:33,661 - __main__ - ERROR - Failed to sync 501307: Connection closed
+2025-07-22 19:57:33,661 - scraper - INFO - Fetching historical data for 501306
+2025-07-22 19:57:34,153 - __main__ - ERROR - Failed to sync 501306: Connection closed
+2025-07-22 19:57:34,154 - scraper - INFO - Fetching historical data for 501305
+2025-07-22 19:57:34,644 - __main__ - ERROR - Failed to sync 501305: Connection closed
+2025-07-22 19:57:34,644 - scraper - INFO - Fetching historical data for 164705
+2025-07-22 19:57:35,146 - __main__ - ERROR - Failed to sync 164705: Connection closed
+2025-07-22 19:57:35,146 - scraper - INFO - Fetching historical data for 501025
+2025-07-22 19:57:35,709 - __main__ - ERROR - Failed to sync 501025: Connection closed
+2025-07-22 19:57:35,709 - scraper - INFO - Fetching historical data for 501310
+2025-07-22 19:57:36,203 - __main__ - ERROR - Failed to sync 501310: Connection closed
+2025-07-22 19:57:36,203 - scraper - INFO - Fetching historical data for 501311
+2025-07-22 19:57:36,648 - __main__ - ERROR - Failed to sync 501311: Connection closed
+2025-07-22 19:57:36,648 - scraper - INFO - Fetching historical data for 501303
+2025-07-22 19:57:37,151 - __main__ - ERROR - Failed to sync 501303: Connection closed
+2025-07-22 19:57:37,151 - scraper - INFO - Fetching historical data for 501021
+2025-07-22 19:57:37,651 - __main__ - ERROR - Failed to sync 501021: Connection closed
+2025-07-22 19:57:37,652 - scraper - INFO - Fetching historical data for 160322
+2025-07-22 19:57:38,157 - __main__ - ERROR - Failed to sync 160322: Connection closed
+2025-07-22 19:57:38,157 - scraper - INFO - Fetching historical data for 501302
+2025-07-22 19:57:38,659 - __main__ - ERROR - Failed to sync 501302: Connection closed
+2025-07-22 19:57:38,660 - scraper - INFO - Fetching historical data for 161831
+2025-07-22 19:57:39,206 - __main__ - ERROR - Failed to sync 161831: Connection closed
+2025-07-22 19:57:39,207 - scraper - INFO - Fetching historical data for 160924
+2025-07-22 19:57:39,656 - __main__ - ERROR - Failed to sync 160924: Connection closed
+2025-07-22 19:57:39,657 - scraper - INFO - Fetching historical data for 501301
+2025-07-22 19:57:40,159 - __main__ - ERROR - Failed to sync 501301: Connection closed
+2025-07-22 19:57:40,160 - scraper - INFO - Fetching historical data for 160717
+2025-07-22 19:57:40,657 - __main__ - ERROR - Failed to sync 160717: Connection closed
+2025-07-22 19:57:40,659 - __main__ - INFO - Incremental sync completed: 0 records for 0 codes
+2025-07-23 12:55:30,043 - __main__ - INFO - Starting incremental sync...
+2025-07-23 12:55:30,043 - scraper - INFO - Fetching historical data for 161126
+2025-07-23 12:55:30,301 - __main__ - ERROR - Failed to sync 161126: Connection closed
+2025-07-23 12:55:30,301 - scraper - INFO - Fetching historical data for 501312
+2025-07-23 12:55:30,592 - __main__ - ERROR - Failed to sync 501312: Connection closed
+2025-07-23 12:55:30,593 - scraper - INFO - Fetching historical data for 164906
+2025-07-23 12:55:31,097 - __main__ - ERROR - Failed to sync 164906: Connection closed
+2025-07-23 12:55:31,097 - scraper - INFO - Fetching historical data for 161128
+2025-07-23 12:55:31,600 - __main__ - ERROR - Failed to sync 161128: Connection closed
+2025-07-23 12:55:31,600 - scraper - INFO - Fetching historical data for 501300
+2025-07-23 12:55:32,117 - __main__ - ERROR - Failed to sync 501300: Connection closed
+2025-07-23 12:55:32,117 - scraper - INFO - Fetching historical data for 160644
+2025-07-23 12:55:32,601 - __main__ - ERROR - Failed to sync 160644: Connection closed
+2025-07-23 12:55:32,602 - scraper - INFO - Fetching historical data for 161127
+2025-07-23 12:55:33,107 - __main__ - ERROR - Failed to sync 161127: Connection closed
+2025-07-23 12:55:33,107 - scraper - INFO - Fetching historical data for 161125
+2025-07-23 12:55:33,694 - __main__ - ERROR - Failed to sync 161125: Connection closed
+2025-07-23 12:55:33,695 - scraper - INFO - Fetching historical data for 161130
+2025-07-23 12:55:34,118 - __main__ - ERROR - Failed to sync 161130: Connection closed
+2025-07-23 12:55:34,119 - scraper - INFO - Fetching historical data for 160140
+2025-07-23 12:55:34,597 - __main__ - ERROR - Failed to sync 160140: Connection closed
+2025-07-23 12:55:34,597 - scraper - INFO - Fetching historical data for 162415
+2025-07-23 12:55:35,195 - __main__ - ERROR - Failed to sync 162415: Connection closed
+2025-07-23 12:55:35,196 - scraper - INFO - Fetching historical data for 501225
+2025-07-23 12:55:35,613 - __main__ - ERROR - Failed to sync 501225: Connection closed
+2025-07-23 12:55:35,614 - scraper - INFO - Fetching historical data for 164824
+2025-07-23 12:55:36,099 - __main__ - ERROR - Failed to sync 164824: Connection closed
+2025-07-23 12:55:36,099 - scraper - INFO - Fetching historical data for 160125
+2025-07-23 12:55:36,606 - __main__ - ERROR - Failed to sync 160125: Connection closed
+2025-07-23 12:55:36,607 - scraper - INFO - Fetching historical data for 161129
+2025-07-23 12:55:37,199 - __main__ - ERROR - Failed to sync 161129: Connection closed
+2025-07-23 12:55:37,200 - scraper - INFO - Fetching historical data for 501018
+2025-07-23 12:55:37,605 - __main__ - ERROR - Failed to sync 501018: Connection closed
+2025-07-23 12:55:37,606 - scraper - INFO - Fetching historical data for 162411
+2025-07-23 12:55:38,102 - __main__ - ERROR - Failed to sync 162411: Connection closed
+2025-07-23 12:55:38,102 - scraper - INFO - Fetching historical data for 165513
+2025-07-23 12:55:38,607 - __main__ - ERROR - Failed to sync 165513: Connection closed
+2025-07-23 12:55:38,608 - scraper - INFO - Fetching historical data for 161116
+2025-07-23 12:55:39,105 - __main__ - ERROR - Failed to sync 161116: Connection closed
+2025-07-23 12:55:39,106 - scraper - INFO - Fetching historical data for 161815
+2025-07-23 12:55:39,621 - __main__ - ERROR - Failed to sync 161815: Connection closed
+2025-07-23 12:55:39,622 - scraper - INFO - Fetching historical data for 160216
+2025-07-23 12:55:40,207 - __main__ - ERROR - Failed to sync 160216: Connection closed
+2025-07-23 12:55:40,208 - scraper - INFO - Fetching historical data for 161124
+2025-07-23 12:55:40,616 - __main__ - ERROR - Failed to sync 161124: Connection closed
+2025-07-23 12:55:40,617 - scraper - INFO - Fetching historical data for 501307
+2025-07-23 12:55:41,195 - __main__ - ERROR - Failed to sync 501307: Connection closed
+2025-07-23 12:55:41,196 - scraper - INFO - Fetching historical data for 501306
+2025-07-23 12:55:41,696 - __main__ - ERROR - Failed to sync 501306: Connection closed
+2025-07-23 12:55:41,696 - scraper - INFO - Fetching historical data for 501305
+2025-07-23 12:55:42,194 - __main__ - ERROR - Failed to sync 501305: Connection closed
+2025-07-23 12:55:42,195 - scraper - INFO - Fetching historical data for 164705
+2025-07-23 12:55:42,694 - __main__ - ERROR - Failed to sync 164705: Connection closed
+2025-07-23 12:55:42,694 - scraper - INFO - Fetching historical data for 501025
+2025-07-23 12:55:43,209 - __main__ - ERROR - Failed to sync 501025: Connection closed
+2025-07-23 12:55:43,209 - scraper - INFO - Fetching historical data for 501310
+2025-07-23 12:55:43,694 - __main__ - ERROR - Failed to sync 501310: Connection closed
+2025-07-23 12:55:43,694 - scraper - INFO - Fetching historical data for 501311
+2025-07-23 12:55:44,196 - __main__ - ERROR - Failed to sync 501311: Connection closed
+2025-07-23 12:55:44,196 - scraper - INFO - Fetching historical data for 501303
+2025-07-23 12:55:44,705 - __main__ - ERROR - Failed to sync 501303: Connection closed
+2025-07-23 12:55:44,706 - scraper - INFO - Fetching historical data for 501021
+2025-07-23 12:55:45,220 - __main__ - ERROR - Failed to sync 501021: Connection closed
+2025-07-23 12:55:45,221 - scraper - INFO - Fetching historical data for 160322
+2025-07-23 12:55:45,697 - __main__ - ERROR - Failed to sync 160322: Connection closed
+2025-07-23 12:55:45,697 - scraper - INFO - Fetching historical data for 501302
+2025-07-23 12:55:46,196 - __main__ - ERROR - Failed to sync 501302: Connection closed
+2025-07-23 12:55:46,197 - scraper - INFO - Fetching historical data for 161831
+2025-07-23 12:55:46,695 - __main__ - ERROR - Failed to sync 161831: Connection closed
+2025-07-23 12:55:46,695 - scraper - INFO - Fetching historical data for 160924
+2025-07-23 12:55:47,206 - __main__ - ERROR - Failed to sync 160924: Connection closed
+2025-07-23 12:55:47,206 - scraper - INFO - Fetching historical data for 501301
+2025-07-23 12:55:47,692 - __main__ - ERROR - Failed to sync 501301: Connection closed
+2025-07-23 12:55:47,692 - scraper - INFO - Fetching historical data for 160717
+2025-07-23 12:55:48,194 - __main__ - ERROR - Failed to sync 160717: Connection closed
+2025-07-23 12:55:48,195 - __main__ - INFO - Incremental sync completed: 0 records for 0 codes

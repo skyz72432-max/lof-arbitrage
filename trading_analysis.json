@@ -1,0 +1,1527 @@
+{
+  "generated_at": "2025-07-19T20:06:39.092991",
+  "methodology": {
+    "description": "基于历史溢价率的均值回归交易策略",
+    "timeframes": [
+      "7d",
+      "14d",
+      "21d"
+    ],
+    "threshold": "±1.5σ (标准差)",
+    "risk_management": "基于统计套利的低风险策略"
+  },
+  "signals": [
+    {
+      "code": "501312",
+      "current_premium": 1.92,
+      "current_price": 1.873,
+      "averages": {
+        "7d": {
+          "avg": 0.67,
+          "std": 0.87,
+          "current": 1.92,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.03,
+          "std": 1.03,
+          "current": 1.92,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.23,
+          "std": 0.92,
+          "current": 1.92,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 1.44,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±1.3%)"
+        },
+        "14d": {
+          "vs_14d": 1.95,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 2.15,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "161126",
+      "current_premium": 1.29,
+      "current_price": 1.794,
+      "averages": {
+        "7d": {
+          "avg": 0.75,
+          "std": 0.58,
+          "current": 1.29,
+          "count": 5
+        },
+        "14d": {
+          "avg": 0.06,
+          "std": 0.86,
+          "current": 1.29,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.11,
+          "std": 0.76,
+          "current": 1.29,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 0.93,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.87%)"
+        },
+        "14d": {
+          "vs_14d": 1.23,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 1.4,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "161831",
+      "current_premium": -1.01,
+      "current_price": 0.807,
+      "averages": {
+        "7d": {
+          "avg": -0.71,
+          "std": 0.56,
+          "current": -1.01,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.52,
+          "std": 0.5,
+          "current": -1.01,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.35,
+          "std": 0.5,
+          "current": -1.01,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.54,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.84%)"
+        },
+        "14d": {
+          "vs_14d": -0.49,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.66,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "160717",
+      "current_premium": -1.01,
+      "current_price": 0.792,
+      "averages": {
+        "7d": {
+          "avg": -0.69,
+          "std": 0.42,
+          "current": -1.01,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.52,
+          "std": 0.41,
+          "current": -1.01,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.35,
+          "std": 0.46,
+          "current": -1.01,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.76,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.63%)"
+        },
+        "14d": {
+          "vs_14d": -0.49,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.66,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "501301",
+      "current_premium": -0.98,
+      "current_price": 1.336,
+      "averages": {
+        "7d": {
+          "avg": -0.66,
+          "std": 0.54,
+          "current": -0.98,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.45,
+          "std": 0.51,
+          "current": -0.98,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.25,
+          "std": 0.58,
+          "current": -0.98,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.59,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.81%)"
+        },
+        "14d": {
+          "vs_14d": -0.53,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.73,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "160924",
+      "current_premium": -0.96,
+      "current_price": 1.018,
+      "averages": {
+        "7d": {
+          "avg": -0.56,
+          "std": 0.41,
+          "current": -0.96,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.41,
+          "std": 0.43,
+          "current": -0.96,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.27,
+          "std": 0.43,
+          "current": -0.96,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.98,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.62%)"
+        },
+        "14d": {
+          "vs_14d": -0.55,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.69,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "164824",
+      "current_premium": -0.93,
+      "current_price": 1.528,
+      "averages": {
+        "7d": {
+          "avg": -0.67,
+          "std": 0.3,
+          "current": -0.93,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.87,
+          "std": 0.39,
+          "current": -0.93,
+          "count": 9
+        },
+        "21d": {
+          "avg": -0.98,
+          "std": 0.37,
+          "current": -0.93,
+          "count": 14
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.87,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.45%)"
+        },
+        "14d": {
+          "vs_14d": -0.06,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": 0.05,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "501302",
+      "current_premium": -0.87,
+      "current_price": 1.164,
+      "averages": {
+        "7d": {
+          "avg": -0.64,
+          "std": 0.4,
+          "current": -0.87,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.48,
+          "std": 0.36,
+          "current": -0.87,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.35,
+          "std": 0.42,
+          "current": -0.87,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.57,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.6%)"
+        },
+        "14d": {
+          "vs_14d": -0.39,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.52,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "160322",
+      "current_premium": -0.76,
+      "current_price": 1.119,
+      "averages": {
+        "7d": {
+          "avg": -0.69,
+          "std": 0.3,
+          "current": -0.76,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.52,
+          "std": 0.35,
+          "current": -0.76,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.38,
+          "std": 0.41,
+          "current": -0.76,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.23,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.45%)"
+        },
+        "14d": {
+          "vs_14d": -0.24,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.38,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "501021",
+      "current_premium": -0.73,
+      "current_price": 1.416,
+      "averages": {
+        "7d": {
+          "avg": -0.59,
+          "std": 0.29,
+          "current": -0.73,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.52,
+          "std": 0.27,
+          "current": -0.73,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.47,
+          "std": 0.31,
+          "current": -0.73,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.48,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.43%)"
+        },
+        "14d": {
+          "vs_14d": -0.21,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.26,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "161129",
+      "current_premium": 0.72,
+      "current_price": 1.204,
+      "averages": {
+        "7d": {
+          "avg": -0.54,
+          "std": 0.99,
+          "current": 0.72,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.76,
+          "std": 0.75,
+          "current": 0.72,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.52,
+          "std": 0.77,
+          "current": 0.72,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 1.27,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±1.48%)"
+        },
+        "14d": {
+          "vs_14d": 1.48,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 1.24,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "501303",
+      "current_premium": -0.7,
+      "current_price": 1.042,
+      "averages": {
+        "7d": {
+          "avg": -0.63,
+          "std": 0.21,
+          "current": -0.7,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.58,
+          "std": 0.29,
+          "current": -0.7,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.47,
+          "std": 0.37,
+          "current": -0.7,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.33,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.32%)"
+        },
+        "14d": {
+          "vs_14d": -0.12,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.23,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "501018",
+      "current_premium": 0.6,
+      "current_price": 1.233,
+      "averages": {
+        "7d": {
+          "avg": -0.58,
+          "std": 0.89,
+          "current": 0.6,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.8,
+          "std": 0.67,
+          "current": 0.6,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.27,
+          "std": 1.15,
+          "current": 0.6,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 1.33,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±1.34%)"
+        },
+        "14d": {
+          "vs_14d": 1.4,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 0.87,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "501311",
+      "current_premium": -0.59,
+      "current_price": 1.171,
+      "averages": {
+        "7d": {
+          "avg": -0.44,
+          "std": 0.52,
+          "current": -0.59,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.3,
+          "std": 0.48,
+          "current": -0.59,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.2,
+          "std": 0.47,
+          "current": -0.59,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.29,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.78%)"
+        },
+        "14d": {
+          "vs_14d": -0.29,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.39,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "164906",
+      "current_premium": 0.59,
+      "current_price": 1.249,
+      "averages": {
+        "7d": {
+          "avg": 0.31,
+          "std": 0.78,
+          "current": 0.59,
+          "count": 5
+        },
+        "14d": {
+          "avg": 0.06,
+          "std": 0.85,
+          "current": 0.59,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.1,
+          "std": 0.76,
+          "current": 0.59,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 0.36,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±1.17%)"
+        },
+        "14d": {
+          "vs_14d": 0.53,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 0.69,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "161128",
+      "current_premium": 0.57,
+      "current_price": 5.418,
+      "averages": {
+        "7d": {
+          "avg": 0.0,
+          "std": 0.81,
+          "current": 0.57,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.14,
+          "std": 0.68,
+          "current": 0.57,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.15,
+          "std": 0.63,
+          "current": 0.57,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 0.7,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±1.22%)"
+        },
+        "14d": {
+          "vs_14d": 0.71,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 0.72,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "160644",
+      "current_premium": 0.56,
+      "current_price": 1.393,
+      "averages": {
+        "7d": {
+          "avg": 0.35,
+          "std": 0.41,
+          "current": 0.56,
+          "count": 5
+        },
+        "14d": {
+          "avg": 0.24,
+          "std": 0.64,
+          "current": 0.56,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.06,
+          "std": 0.68,
+          "current": 0.56,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 0.51,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.62%)"
+        },
+        "14d": {
+          "vs_14d": 0.32,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 0.62,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "162415",
+      "current_premium": -0.56,
+      "current_price": 2.851,
+      "averages": {
+        "7d": {
+          "avg": -0.65,
+          "std": 0.27,
+          "current": -0.56,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.87,
+          "std": 0.53,
+          "current": -0.56,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.87,
+          "std": 0.5,
+          "current": -0.56,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 0.33,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.4%)"
+        },
+        "14d": {
+          "vs_14d": 0.31,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 0.31,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "501225",
+      "current_premium": -0.56,
+      "current_price": 1.586,
+      "averages": {
+        "7d": {
+          "avg": -0.59,
+          "std": 0.72,
+          "current": -0.56,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.78,
+          "std": 0.62,
+          "current": -0.56,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.75,
+          "std": 0.61,
+          "current": -0.56,
+          "count": 14
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 0.04,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±1.08%)"
+        },
+        "14d": {
+          "vs_14d": 0.22,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 0.19,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "160216",
+      "current_premium": -0.55,
+      "current_price": 0.544,
+      "averages": {
+        "7d": {
+          "avg": -0.47,
+          "std": 0.16,
+          "current": -0.55,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.51,
+          "std": 0.37,
+          "current": -0.55,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.5,
+          "std": 0.36,
+          "current": -0.55,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.5,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.24%)"
+        },
+        "14d": {
+          "vs_14d": -0.04,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.05,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "501310",
+      "current_premium": -0.54,
+      "current_price": 1.301,
+      "averages": {
+        "7d": {
+          "avg": -0.13,
+          "std": 0.3,
+          "current": -0.54,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.2,
+          "std": 0.31,
+          "current": -0.54,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.17,
+          "std": 0.32,
+          "current": -0.54,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -1.37,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.45%)"
+        },
+        "14d": {
+          "vs_14d": -0.34,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.37,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "161116",
+      "current_premium": -0.53,
+      "current_price": 1.305,
+      "averages": {
+        "7d": {
+          "avg": -0.47,
+          "std": 0.32,
+          "current": -0.53,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.47,
+          "std": 0.26,
+          "current": -0.53,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.17,
+          "std": 0.65,
+          "current": -0.53,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.19,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.48%)"
+        },
+        "14d": {
+          "vs_14d": -0.06,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.36,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "501300",
+      "current_premium": 0.44,
+      "current_price": 0.964,
+      "averages": {
+        "7d": {
+          "avg": 0.53,
+          "std": 0.07,
+          "current": 0.44,
+          "count": 5
+        },
+        "14d": {
+          "avg": 0.45,
+          "std": 0.14,
+          "current": 0.44,
+          "count": 10
+        },
+        "21d": {
+          "avg": 0.36,
+          "std": 0.19,
+          "current": 0.44,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -1.29,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.11%)"
+        },
+        "14d": {
+          "vs_14d": -0.01,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": 0.08,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "501025",
+      "current_premium": -0.44,
+      "current_price": 1.682,
+      "averages": {
+        "7d": {
+          "avg": 0.3,
+          "std": 0.46,
+          "current": -0.44,
+          "count": 5
+        },
+        "14d": {
+          "avg": 0.3,
+          "std": 0.42,
+          "current": -0.44,
+          "count": 10
+        },
+        "21d": {
+          "avg": 0.34,
+          "std": 0.48,
+          "current": -0.44,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "BUY",
+          "confidence": 0.32,
+          "z_score": -1.61,
+          "reason": "当前折价率(-0.44%)显著低于7日平均(0.3%)",
+          "threshold": "±1.5σ (±0.69%)"
+        },
+        "14d": {
+          "vs_14d": -0.74,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.78,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "164705",
+      "current_premium": -0.42,
+      "current_price": 1.154,
+      "averages": {
+        "7d": {
+          "avg": -0.29,
+          "std": 0.46,
+          "current": -0.42,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.16,
+          "std": 0.45,
+          "current": -0.42,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.05,
+          "std": 0.47,
+          "current": -0.42,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.28,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.69%)"
+        },
+        "14d": {
+          "vs_14d": -0.26,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.37,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "162411",
+      "current_premium": 0.37,
+      "current_price": 0.731,
+      "averages": {
+        "7d": {
+          "avg": -0.32,
+          "std": 0.54,
+          "current": 0.37,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.63,
+          "std": 0.54,
+          "current": 0.37,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.6,
+          "std": 0.48,
+          "current": 0.37,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 1.28,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.81%)"
+        },
+        "14d": {
+          "vs_14d": 1.0,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 0.97,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "160140",
+      "current_premium": -0.36,
+      "current_price": 1.266,
+      "averages": {
+        "7d": {
+          "avg": -0.72,
+          "std": 0.25,
+          "current": -0.36,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.59,
+          "std": 0.36,
+          "current": -0.36,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.56,
+          "std": 0.39,
+          "current": -0.36,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 1.44,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.38%)"
+        },
+        "14d": {
+          "vs_14d": 0.23,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 0.2,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "161815",
+      "current_premium": -0.35,
+      "current_price": 0.854,
+      "averages": {
+        "7d": {
+          "avg": -0.63,
+          "std": 0.24,
+          "current": -0.35,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.76,
+          "std": 0.29,
+          "current": -0.35,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.7,
+          "std": 0.27,
+          "current": -0.35,
+          "count": 14
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 1.17,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.36%)"
+        },
+        "14d": {
+          "vs_14d": 0.41,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 0.35,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "501306",
+      "current_premium": -0.26,
+      "current_price": 1.221,
+      "averages": {
+        "7d": {
+          "avg": -0.08,
+          "std": 0.3,
+          "current": -0.26,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.12,
+          "std": 0.25,
+          "current": -0.26,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.14,
+          "std": 0.28,
+          "current": -0.26,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.6,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.45%)"
+        },
+        "14d": {
+          "vs_14d": -0.14,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.12,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "501305",
+      "current_premium": -0.25,
+      "current_price": 1.26,
+      "averages": {
+        "7d": {
+          "avg": -0.11,
+          "std": 0.23,
+          "current": -0.25,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.17,
+          "std": 0.23,
+          "current": -0.25,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.17,
+          "std": 0.28,
+          "current": -0.25,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.61,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.34%)"
+        },
+        "14d": {
+          "vs_14d": -0.08,
+          "interpretation": "折价"
+        },
+        "21d": {
+          "vs_21d": -0.08,
+          "interpretation": "折价"
+        }
+      }
+    },
+    {
+      "code": "161130",
+      "current_premium": -0.24,
+      "current_price": 3.715,
+      "averages": {
+        "7d": {
+          "avg": -0.4,
+          "std": 0.4,
+          "current": -0.24,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.55,
+          "std": 0.36,
+          "current": -0.24,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.48,
+          "std": 0.39,
+          "current": -0.24,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 0.4,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.6%)"
+        },
+        "14d": {
+          "vs_14d": 0.31,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 0.24,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "161127",
+      "current_premium": 0.23,
+      "current_price": 1.285,
+      "averages": {
+        "7d": {
+          "avg": 0.08,
+          "std": 0.42,
+          "current": 0.23,
+          "count": 5
+        },
+        "14d": {
+          "avg": 0.02,
+          "std": 0.48,
+          "current": 0.23,
+          "count": 10
+        },
+        "21d": {
+          "avg": 0.11,
+          "std": 0.54,
+          "current": 0.23,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 0.36,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.63%)"
+        },
+        "14d": {
+          "vs_14d": 0.21,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 0.12,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "161125",
+      "current_premium": -0.22,
+      "current_price": 2.735,
+      "averages": {
+        "7d": {
+          "avg": -0.56,
+          "std": 0.35,
+          "current": -0.22,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.65,
+          "std": 0.31,
+          "current": -0.22,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.59,
+          "std": 0.34,
+          "current": -0.22,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 0.97,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.52%)"
+        },
+        "14d": {
+          "vs_14d": 0.43,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 0.37,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "161124",
+      "current_premium": 0.09,
+      "current_price": 1.155,
+      "averages": {
+        "7d": {
+          "avg": -0.38,
+          "std": 0.34,
+          "current": 0.09,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.55,
+          "std": 0.35,
+          "current": 0.09,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.51,
+          "std": 0.38,
+          "current": 0.09,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 1.38,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.51%)"
+        },
+        "14d": {
+          "vs_14d": 0.64,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 0.6,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "165513",
+      "current_premium": 0.08,
+      "current_price": 0.863,
+      "averages": {
+        "7d": {
+          "avg": -0.5,
+          "std": 0.48,
+          "current": 0.08,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.63,
+          "std": 0.38,
+          "current": 0.08,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.56,
+          "std": 0.39,
+          "current": 0.08,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": 1.21,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.72%)"
+        },
+        "14d": {
+          "vs_14d": 0.71,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 0.64,
+          "interpretation": "溢价"
+        }
+      }
+    },
+    {
+      "code": "501307",
+      "current_premium": -0.08,
+      "current_price": 1.198,
+      "averages": {
+        "7d": {
+          "avg": 0.0,
+          "std": 0.11,
+          "current": -0.08,
+          "count": 5
+        },
+        "14d": {
+          "avg": -0.15,
+          "std": 0.3,
+          "current": -0.08,
+          "count": 10
+        },
+        "21d": {
+          "avg": -0.17,
+          "std": 0.27,
+          "current": -0.08,
+          "count": 15
+        }
+      },
+      "signals": {
+        "7d": {
+          "signal": "HOLD",
+          "confidence": 0.5,
+          "z_score": -0.73,
+          "reason": "当前溢价率处于正常区间",
+          "threshold": "±1.5σ (±0.16%)"
+        },
+        "14d": {
+          "vs_14d": 0.07,
+          "interpretation": "溢价"
+        },
+        "21d": {
+          "vs_21d": 0.09,
+          "interpretation": "溢价"
+        }
+      }
+    }
+  ]
+}

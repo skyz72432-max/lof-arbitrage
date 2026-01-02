@@ -1,0 +1,27 @@
+2025-07-25 16:20:50 [START] 开始每日LOF数据同步
+2025-07-25 16:20:50 [OK] 虚拟环境已激活
+2025-07-25 16:20:50 [RUN] 执行数据同步...
+/Users/moonshot/cursor/get_jisilu/core/data_sync.py:131: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value '2.7791' has dtype incompatible with float64, please explicitly cast to a compatible dtype first.
+  merged_df.loc[mask, col] = api_row[col]
+/Users/moonshot/cursor/get_jisilu/core/data_sync.py:131: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value '3.7637' has dtype incompatible with float64, please explicitly cast to a compatible dtype first.
+  merged_df.loc[mask, col] = api_row[col]
+/Users/moonshot/cursor/get_jisilu/core/data_sync.py:131: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value '1.5241' has dtype incompatible with float64, please explicitly cast to a compatible dtype first.
+  merged_df.loc[mask, col] = api_row[col]
+/Users/moonshot/cursor/get_jisilu/core/data_sync.py:131: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value '1.2023' has dtype incompatible with float64, please explicitly cast to a compatible dtype first.
+  merged_df.loc[mask, col] = api_row[col]
+/Users/moonshot/cursor/get_jisilu/core/data_sync.py:131: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value '1.2292' has dtype incompatible with float64, please explicitly cast to a compatible dtype first.
+  merged_df.loc[mask, col] = api_row[col]
+/Users/moonshot/cursor/get_jisilu/core/data_sync.py:131: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value '0.7270' has dtype incompatible with float64, please explicitly cast to a compatible dtype first.
+  merged_df.loc[mask, col] = api_row[col]
+/Users/moonshot/cursor/get_jisilu/core/data_sync.py:131: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value '0.8714' has dtype incompatible with float64, please explicitly cast to a compatible dtype first.
+  merged_df.loc[mask, col] = api_row[col]
+/Users/moonshot/cursor/get_jisilu/core/data_sync.py:131: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value '1.3293' has dtype incompatible with float64, please explicitly cast to a compatible dtype first.
+  merged_df.loc[mask, col] = api_row[col]
+/Users/moonshot/cursor/get_jisilu/core/data_sync.py:131: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value '0.8627' has dtype incompatible with float64, please explicitly cast to a compatible dtype first.
+  merged_df.loc[mask, col] = api_row[col]
+/Users/moonshot/cursor/get_jisilu/core/data_sync.py:131: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value '0.5535' has dtype incompatible with float64, please explicitly cast to a compatible dtype first.
+  merged_df.loc[mask, col] = api_row[col]
+2025-07-25 16:20:56 [SUCCESS] 数据同步完成
+2025-07-25 16:20:56 [RESULT] 示例LOF(160140) 最新数据: 2025-07-25, 总记录:       55
+2025-07-25 16:20:56 [VERIFY] 验证数据完整性...
+2025-07-25 16:20:57 [COMPLETE] 每日同步完成

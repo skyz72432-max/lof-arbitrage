@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "WebFetch(domain:www.jisilu.cn)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(mv:*)",
+      "Bash(true)",
+      "Bash(chmod:*)",
+      "Bash(./quick_start.sh:*)",
+      "Bash(source:*)",
+      "Bash(streamlit run:*)",
+      "Bash(./daily_sync.sh)"
+    ],
+    "deny": []
+  }
+}
