@@ -383,7 +383,7 @@ def main():
         )
 
         st.dataframe(styled_top_df, use_container_width=True)
-        st.caption("注：当日基金净值未公布前，**当前溢价**根据**实时估值**计算。")
+        st.caption("注：当日基金净值公布前，**当前溢价**根据**实时估值**计算。")
 
     with col_right:
         st.info(
