@@ -100,7 +100,7 @@ class LOFArbitrageAnalyzer:
                 print(f"加载 {code} 数据失败: {e}")
 
     def premium_stats(self, df, days):
-        cutoff = datetime.now(ZoneInfo("Asia/Shanghai")) - timedelta(days=days)
+        cutoff_cn = datetime.now(ZoneInfo("Asia/Shanghai")) - timedelta(days=days)
         cutoff = cutoff_cn.replace(tzinfo=None)
         d = df[df["price_dt"] >= cutoff]
         return {
