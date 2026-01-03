@@ -4,7 +4,7 @@ LOF 溢价套利胜率评分仪表板（完整版）
 import os
 import warnings
 from datetime import datetime, timedelta, time
-
+from zoneinfo import ZoneInfo
 import numpy as np
 import pandas as pd
 import streamlit as st
@@ -34,8 +34,11 @@ def is_monotonic_increasing(arr):
 def is_monotonic_decreasing(arr):
     return all(arr[i] > arr[i + 1] for i in range(len(arr) - 1))
 
+def now_cn():
+    return datetime.now(ZoneInfo("Asia/Shanghai"))
+
 def is_pre_order_time():
-    now = datetime.now().time()
+    now = now_cn().time()
     return time(9, 30) <= now <= time(14, 30)
 
 def score_to_signal(score):
@@ -809,9 +812,9 @@ def main():
 
         st.markdown("### 🔹 具体策略")
         st.markdown("""
-        - **高溢价(>3%)**：集合竞价挂单  
+        - **高溢价(> 3%)**：集合竞价挂单  
         - **中等溢价**：早盘观察后决策
-        - **低溢价(<1%)**：14:30 后决定
+        - **低溢价(< 1%)**：14:30 后决定
         """)
 
         st.markdown("### 🔹 执行纪律")
