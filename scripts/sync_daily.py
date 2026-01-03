@@ -13,15 +13,18 @@ from utils.trading_calendar import is_trading_day
 from core.data_sync import DataSyncCore
 from utils.data_manager import DataManager
 from fetch_fund_purchase import fetch_or_load_fund_purchase
+from zoneinfo import ZoneInfo
 
 def write_last_update_time():
     """
-    在项目根目录写入最近一次成功同步时间
+    在项目根目录写入最近一次成功同步时间（北京时间）
     """
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     path = os.path.join(project_root, "last_sync_time.txt")
 
-    now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+    now_cn = datetime.now(ZoneInfo("Asia/Shanghai"))
+    now_str = now_cn.strftime("%Y-%m-%d %H:%M")
+
     with open(path, "w", encoding="utf-8") as f:
         f.write(now_str)
         
