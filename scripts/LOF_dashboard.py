@@ -101,6 +101,7 @@ class LOFArbitrageAnalyzer:
 
     def premium_stats(self, df, days):
         cutoff = datetime.now(ZoneInfo("Asia/Shanghai")) - timedelta(days=days)
+        cutoff = cutoff_cn.replace(tzinfo=None)
         d = df[df["price_dt"] >= cutoff]
         return {
             "mean": d["discount_rt"].mean(),
