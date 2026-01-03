@@ -8,7 +8,7 @@ import argparse
 
 # 添加路径以便导入模块
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import datetime
+from datetime import datetime
 from utils.trading_calendar import is_trading_day
 from core.data_sync import DataSyncCore
 from utils.data_manager import DataManager
