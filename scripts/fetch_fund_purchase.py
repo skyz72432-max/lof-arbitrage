@@ -10,10 +10,10 @@ import os
 import pandas as pd
 import akshare as ak
 from datetime import datetime
-
+from zoneinfo import ZoneInfo
 
 def today_str() -> str:
-    return datetime.now().strftime("%Y%m%d")
+    return datetime.now(ZoneInfo("Asia/Shanghai")).strftime("%Y%m%d")
 
 def get_project_root() -> str:
     """当前脚本所在目录的父目录"""
