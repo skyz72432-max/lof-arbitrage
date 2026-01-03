@@ -31,7 +31,7 @@ def write_last_update_time():
 def main():
 
     # ===== 交易日判断=====
-    if not is_trading_day(datetime.date.today()):
+    if not is_trading_day(datetime.now(ZoneInfo("Asia/Shanghai")).date()):
         print("📅 非交易日，跳过同步")
         return
 
