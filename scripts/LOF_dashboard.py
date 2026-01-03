@@ -50,6 +50,22 @@ def score_to_signal(score):
     else:
         return "放弃"
 
+def get_last_sync_time():
+    """
+    读取最近一次 sync_daily.py 成功运行时间
+    """
+    project_root = get_project_root()
+    path = os.path.join(project_root, "last_sync_time.txt")
+
+    if not os.path.exists(path):
+        return "暂无记录"
+
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return f.read().strip()
+    except Exception:
+        return "读取失败"
+        
 # ======================================================
 # 分析器
 # ======================================================
@@ -315,7 +331,8 @@ def main():
 
     st.title("📈 LOF 溢价套利【每日机会】")
     st.markdown("### 基于行情数据，寻找套利机会，盘中实时更新")
-
+    st.caption(f"🕒 最后更新时间：{get_last_sync_time()}")
+    
     analyzer = LOFArbitrageAnalyzer()
     all_signals = analyzer.get_all_signals()
 
