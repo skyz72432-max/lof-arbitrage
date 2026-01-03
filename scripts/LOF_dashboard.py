@@ -100,7 +100,7 @@ class LOFArbitrageAnalyzer:
                 print(f"加载 {code} 数据失败: {e}")
 
     def premium_stats(self, df, days):
-        cutoff = datetime.now() - timedelta(days=days)
+        cutoff = now_cn() - timedelta(days=days)
         d = df[df["price_dt"] >= cutoff]
         return {
             "mean": d["discount_rt"].mean(),
