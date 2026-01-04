@@ -88,21 +88,6 @@ def main():
 
     write_last_update_time()
     print("🕒 已记录最后同步时间")
-
-def main_handler(event, context):
-    """
-    腾讯云 SCF 入口
-    """
-    try:
-        print("🚀腾讯云 SCF 触发执行 sync_daily")
-        main()
-        return {
-            "status": "success",
-            "time": datetime.now(ZoneInfo("Asia/Shanghai")).strftime("%Y-%m-%d %H:%M:%S")
-        }
-    except Exception as e:
-        print("❌ SCF 执行异常:", e)
-        raise
         
 if __name__ == "__main__":
     main()
