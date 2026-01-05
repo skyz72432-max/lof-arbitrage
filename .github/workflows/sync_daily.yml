@@ -25,16 +25,29 @@ jobs:
         run: |
           python scripts/sync_daily.py
 
-      - name: Configure Git and Commit
+      - name: Configure Git, Pull & Commit
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          # 检查是否有文件变动，有则提交
+          
+          # 1. 配置远程仓库地址，以便后续推送（使用你的PAT）
+          git remote set-url origin https://x-access-token:${{ secrets.LOF_PUSH_TOKEN }}@github.com/skyz72432-max/lof-arbitrage.git
+          
+          # 2. 在提交前，先拉取远程最新变更，避免冲突
+          git pull origin main --rebase
+          
+          # 3. 添加文件变动
           git add data/ last_sync_time.txt fund_purchase_em_*.csv
-          git diff --staged --quiet || (git commit -m "🤖 Auto sync: update LOF data and timestamp" && echo "Changes committed")
+          
+          # 4. 检查是否有变动，有则提交
+          if git diff --staged --quiet; then
+            echo "没有文件变动，跳过提交。"
+          else
+            git commit -m "🤖 Auto sync: update LOF data and timestamp"
+            echo "✅ 变更已提交。"
+          fi
 
       - name: Push Changes
-        uses: ad-m/github-push-action@v0.8.0
-        with:
-          github_token: ${{ secrets.LOF_PUSH_TOKEN }}
-          branch: main
+        run: |
+          # 使用配置好的远程地址进行推送
+          git push origin main
