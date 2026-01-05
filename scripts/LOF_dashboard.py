@@ -368,7 +368,7 @@ def main():
     # ================= 侧边栏 =================
     with st.sidebar:
         st.header("🔧 设置")
-        all_codes = list(analyzer.lof_data.keys())
+        all_codes = list(lof_data.keys())
 
         selected_codes = st.multiselect(
             "选择LOF代码",
