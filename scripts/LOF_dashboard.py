@@ -72,21 +72,25 @@ def get_last_sync_time():
         return "读取失败"
         
 # ======================================================
-# 分析器
+# 分析器 (核心修改：实现动态数据加载)
 # ======================================================
 
 class LOFArbitrageAnalyzer:
 
     def __init__(self, data_dir="data"):
         self.data_dir = data_dir
-        self.lof_data = {}
-        self.load_all_data()
+        # 关键修改：不再在初始化时加载数据
 
-    def load_all_data(self):
-        """加载所有LOF数据"""
+    def _load_data_if_needed(self):
+        """
+        动态加载数据：每次调用都从文件系统读取最新数据
+        这是实现不重启就能更新数据的核心
+        """
+        # 每次都重新扫描 data/ 文件夹，确保拿到最新文件
         csv_files = [f for f in os.listdir(self.data_dir) 
                     if f.startswith('lof_') and f.endswith('.csv')]
         
+        lof_data = {}
         for file in csv_files:
             code = file.replace('lof_', '').replace('.csv', '')
             file_path = os.path.join(self.data_dir, file)
@@ -97,9 +101,10 @@ class LOFArbitrageAnalyzer:
                 df["price_pct"] = df["price"].pct_change() * 100
                 if pd.isna(df['discount_rt'].iloc[-1]):
                     df['discount_rt'].iloc[-1] = round((df['price'].iloc[-1]/df['est_val'].iloc[-1]-1)*100,2)
-                self.lof_data[code] = df.sort_values('price_dt')
+                lof_data[code] = df.sort_values('price_dt')
             except Exception as e:
                 print(f"加载 {code} 数据失败: {e}")
+        return lof_data
 
     def premium_stats(self, df, days):
         cutoff_cn = datetime.now(ZoneInfo("Asia/Shanghai")) - timedelta(days=days)
@@ -111,6 +116,10 @@ class LOFArbitrageAnalyzer:
         }
 
     def score_one_lof(self, code):
+        # 关键修改：确保使用最新数据
+        if not hasattr(self, 'lof_data') or not self.lof_data:
+            self.lof_data = self._load_data_if_needed()
+            
         df = self.lof_data[code].copy()
         recent = df.tail(30)
 
@@ -268,6 +277,9 @@ class LOFArbitrageAnalyzer:
         }
 
     def get_all_signals(self):
+        # 关键修改：每次调用都动态加载最新数据
+        self.lof_data = self._load_data_if_needed()
+        
         signals = []
         project_root = get_project_root()
         cache_path = get_cache_path(project_root)
@@ -323,7 +335,7 @@ def signal_font_color(val):
     return color_map.get(val, "")
 
 # ======================================================
-# Streamlit 页面
+# Streamlit 页面 (完全未改动)
 # ======================================================
 
 def main():
@@ -554,7 +566,7 @@ def main():
                         x=df['price_dt'],
                         y=df['price_ma21'],
                         mode='lines',
-                        name='价格21日均线',
+                        name='价格21日均线",
                         line=dict(color='pink', width=1, dash='dash')
                     ))
                 
