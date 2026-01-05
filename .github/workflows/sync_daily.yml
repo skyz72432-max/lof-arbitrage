@@ -26,14 +26,16 @@ jobs:
           python scripts/sync_daily.py
 
       - name: Configure Git, Pull & Commit
+        env: # 关键修改：将Token设置为环境变量
+          MY_TOKEN: ${{ secrets.LOF_PUSH_TOKEN }}
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           
-          # 1. 配置远程仓库地址，以便后续推送（使用你的PAT）
-          git remote set-url origin https://x-access-token:${{ secrets.LOF_PUSH_TOKEN }}@github.com/skyz72432-max/lof-arbitrage.git
+          # 1. 使用环境变量配置远程仓库地址（格式更安全）
+          git remote set-url origin "https://x-access-token:${MY_TOKEN}@github.com/skyz72432-max/lof-arbitrage.git"
           
-          # 2. 在提交前，先拉取远程最新变更，避免冲突
+          # 2. 拉取远程最新变更
           git pull origin main --rebase
           
           # 3. 添加文件变动
