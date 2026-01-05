@@ -1,5 +1,3 @@
-APP_VERSION = "2026-01-05 15:42"
-
 """
 LOF 溢价套利胜率评分仪表板（完整版）
 """
@@ -14,6 +12,8 @@ import plotly.graph_objects as go
 from streamlit_autorefresh import st_autorefresh
 
 warnings.filterwarnings("ignore")
+
+APP_VERSION = "2026-01-05 15:42"
 
 def get_project_root() -> str:
     """当前脚本所在目录的父目录"""
