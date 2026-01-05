@@ -25,31 +25,37 @@ jobs:
         run: |
           python scripts/sync_daily.py
 
-      - name: Configure Git, Pull & Commit
-        env: # 关键修改：将Token设置为环境变量
+      - name: Configure Git, Stage & Commit Local Changes
+        env:
           MY_TOKEN: ${{ secrets.LOF_PUSH_TOKEN }}
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           
-          # 1. 使用环境变量配置远程仓库地址（格式更安全）
+          # 1. 配置远程仓库地址
           git remote set-url origin "https://x-access-token:${MY_TOKEN}@github.com/skyz72432-max/lof-arbitrage.git"
           
-          # 2. 拉取远程最新变更
-          git pull origin main --rebase
-          
-          # 3. 添加文件变动
+          # 2. 添加所有由脚本生成的数据文件（这是关键调整）
           git add data/ last_sync_time.txt fund_purchase_em_*.csv
           
-          # 4. 检查是否有变动，有则提交
+          # 3. 检查是否有新文件/变动，有则先进行本地提交
           if git diff --staged --quiet; then
-            echo "没有文件变动，跳过提交。"
+            echo "没有检测到新的文件变动，跳过本地提交。"
           else
-            git commit -m "🤖 Auto sync: update LOF data and timestamp"
-            echo "✅ 变更已提交。"
+            git commit -m "🤖 Auto sync: stage local data changes"
+            echo "✅ 本地数据变更已暂存并提交。"
           fi
 
-      - name: Push Changes
+      - name: Pull Latest Changes and Push
+        env:
+          MY_TOKEN: ${{ secrets.LOF_PUSH_TOKEN }}
         run: |
-          # 使用配置好的远程地址进行推送
+          # 1. 确保远程地址已配置（虽然上一步已做，此处确保环境一致）
+          git remote set-url origin "https://x-access-token:${MY_TOKEN}@github.com/skyz72432-max/lof-arbitrage.git"
+          
+          # 2. 拉取远程最新变更并变基（此时工作区应已干净）
+          git pull origin main --rebase
+          
+          # 3. 推送本地提交到远程
           git push origin main
+          echo "✅ 变更已成功同步至远程仓库。"
