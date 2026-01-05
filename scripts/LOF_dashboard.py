@@ -546,7 +546,7 @@ def main():
                         x=df['price_dt'],
                         y=df['price_ma7'],
                         mode='lines',
-                        name='价格7日均线',
+                        name='7日均线',
                         line=dict(color='purple', width=1, dash='dash')
                     ))
                 
@@ -556,7 +556,7 @@ def main():
                         x=df['price_dt'],
                         y=df['price_ma14'],
                         mode='lines',
-                        name='价格14日均线',
+                        name='14日均线',
                         line=dict(color='brown', width=1, dash='dash')
                     ))
                 
@@ -566,7 +566,7 @@ def main():
                         x=df['price_dt'],
                         y=df['price_ma21'],
                         mode='lines',
-                        name='价格21日均线",
+                        name='21日均线',
                         line=dict(color='pink', width=1, dash='dash')
                     ))
                 
