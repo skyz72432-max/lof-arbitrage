@@ -54,7 +54,7 @@ jobs:
           git remote set-url origin "https://x-access-token:${MY_TOKEN}@github.com/skyz72432-max/lof-arbitrage.git"
           
           # 2. 拉取远程最新变更并变基（此时工作区应已干净）
-          git pull origin main --rebase
+          git pull origin main --rebase --autostash
           
           # 3. 推送本地提交到远程
           git push origin main
