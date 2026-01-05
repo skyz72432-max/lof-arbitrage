@@ -42,7 +42,7 @@ jobs:
           git remote set-url origin "https://x-access-token:${MY_TOKEN}@github.com/skyz72432-max/lof-arbitrage.git"
           
           # 2. 添加所有由脚本生成的数据文件（这是关键调整）
-          git add data/ last_sync_time.txt fund_purchase_em_*.csv LOF_dashboard.py
+          git add data/ last_sync_time.txt fund_purchase_em_*.csv scripts/LOF_dashboard.py
           
           # 3. 检查是否有新文件/变动，有则先进行本地提交
           if git diff --staged --quiet; then
