@@ -24,3 +24,17 @@ jobs:
       - name: Run sync_daily.py
         run: |
           python scripts/sync_daily.py
+
+      - name: Configure Git and Commit
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          # 检查是否有文件变动，有则提交
+          git add data/ last_sync_time.txt
+          git diff --staged --quiet || (git commit -m "🤖 Auto sync: update LOF data and timestamp" && echo "Changes committed")
+
+      - name: Push Changes
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
