@@ -28,14 +28,6 @@ def get_today_cache_path(project_root: str) -> str:
         f"fund_purchase_em_{today_str()}.csv"
     )
 
-
-def cleanup_old_cache(project_root: str):
-    """删除历史 fund_purchase_em 缓存"""
-    for fname in os.listdir(project_root):
-        if fname.startswith("fund_purchase_em_") and fname.endswith(".csv"):
-            os.remove(os.path.join(project_root, fname))
-
-
 def normalize_purchase_status(df: pd.DataFrame) -> pd.DataFrame:
     """
     规范化“申购状态”字段：
