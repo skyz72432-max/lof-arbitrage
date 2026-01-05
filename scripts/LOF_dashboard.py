@@ -79,9 +79,11 @@ class LOFArbitrageAnalyzer:
 
     def __init__(self, data_dir="data"):
         self.data_dir = data_dir
-        self.lof_data = {}
-        self.load_all_data()
+        #self.lof_data = {}
+        #self.load_all_data()
 
+    @staticmethod
+    @st.cache_data(ttl=30, show_spinner=False) 
     def load_all_data(self):
         """加载所有LOF数据"""
         csv_files = [f for f in os.listdir(self.data_dir) 
@@ -266,7 +268,8 @@ class LOFArbitrageAnalyzer:
                 "minus": minus
             }
         }
-
+        
+    @st.cache_data(ttl=30, show_spinner=False)
     def get_all_signals(self):
         signals = []
         project_root = get_project_root()
