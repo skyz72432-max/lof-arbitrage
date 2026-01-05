@@ -71,29 +71,39 @@ def normalize_purchase_status(df: pd.DataFrame) -> pd.DataFrame:
 def fetch_or_load_fund_purchase() -> pd.DataFrame:
     """
     对外唯一接口：
-    - 当天已存在 → 直接读取
-    - 否则 → 调用 AkShare 并缓存
+    - 每天只保留 1 份 CSV
+    - 当天多次运行：复用缓存
     """
     project_root = get_project_root()
+    today = today_str()
     cache_path = get_today_cache_path(project_root)
 
+    # 🔥 关键修复：先清理「非今日」的历史 CSV
+    for fname in os.listdir(project_root):
+        if (
+            fname.startswith("fund_purchase_em_")
+            and fname.endswith(".csv")
+            and today not in fname
+        ):
+            os.remove(os.path.join(project_root, fname))
+            print(f"🗑 已删除历史缓存：{fname}")
+
+    # 再判断今天的缓存是否存在
     if os.path.exists(cache_path):
         print(f"📄 使用当日缓存：{os.path.basename(cache_path)}")
         return pd.read_csv(cache_path, dtype={"基金代码": str})
 
     print("🌐 今日首次运行，调用 ak.fund_purchase_em()")
 
-    cleanup_old_cache(project_root)
-
     df = ak.fund_purchase_em().drop(columns=["序号"], errors="ignore")
 
-    # 🔧 关键：规范化申购状态
+    # 🔧 规范化申购状态
     df = normalize_purchase_status(df)
 
-    df["fetch_date"] = today_str()
+    df["fetch_date"] = today
 
     df.to_csv(cache_path, index=False, encoding="utf-8-sig")
-    print(f"✅ 已生成缓存文件：{cache_path}")
+    print(f"✅ 已生成缓存文件：{os.path.basename(cache_path)}")
 
     return df
 
