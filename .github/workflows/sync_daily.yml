@@ -25,6 +25,12 @@ jobs:
         run: |
           python scripts/sync_daily.py
 
+      - name: Bump APP_VERSION
+        run: |
+          VERSION=$(date -u +"%Y-%m-%d %H:%M UTC")
+          sed -i "s/^APP_VERSION = .*/APP_VERSION = \"$VERSION\"/" LOF_dashboard.py
+          echo "APP_VERSION bumped to $VERSION"
+          
       - name: Configure Git, Stage & Commit Local Changes
         env:
           MY_TOKEN: ${{ secrets.LOF_PUSH_TOKEN }}
@@ -36,7 +42,7 @@ jobs:
           git remote set-url origin "https://x-access-token:${MY_TOKEN}@github.com/skyz72432-max/lof-arbitrage.git"
           
           # 2. 添加所有由脚本生成的数据文件（这是关键调整）
-          git add data/ last_sync_time.txt fund_purchase_em_*.csv
+          git add data/ last_sync_time.txt fund_purchase_em_*.csv LOF_dashboard.py
           
           # 3. 检查是否有新文件/变动，有则先进行本地提交
           if git diff --staged --quiet; then
