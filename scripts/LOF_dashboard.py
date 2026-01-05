@@ -15,16 +15,30 @@ warnings.filterwarnings("ignore")
 
 APP_VERSION = "2026-01-05 15:42"
 
-def get_project_root() -> str:
-    """当前脚本所在目录的父目录"""
-    current_file = os.path.abspath(__file__)
-    current_dir = os.path.dirname(current_file)
-    return os.path.dirname(current_dir)
-
-def get_cache_path(project_root: str) -> str:
+def get_latest_cache_path():
+    """
+    动态查找最新的 fund_purchase_em_*.csv 文件
+    每次调用都重新扫描根目录，确保获取最新文件
+    """
+    # 获取当前脚本目录和项目根目录
+    current_script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(current_script_dir)
+    
+    # 查找所有匹配的文件
+    cache_files = []
     for fname in os.listdir(project_root):
         if fname.startswith("fund_purchase_em_") and fname.endswith(".csv"):
-            return os.path.join(project_root, fname)
+            file_path = os.path.join(project_root, fname)
+            # 获取文件修改时间作为判断依据
+            mtime = os.path.getmtime(file_path)
+            cache_files.append((mtime, file_path, fname))
+    
+    if not cache_files:
+        raise FileNotFoundError("未找到 fund_purchase_em_*.csv 文件")
+    
+    # 按修改时间排序，返回最新的文件路径
+    cache_files.sort(reverse=True)  # 按修改时间降序排列
+    return cache_files[0][1]  # 返回最新文件的完整路径
 
 # ======================================================
 # 工具函数
@@ -58,8 +72,12 @@ def score_to_signal(score):
 def get_last_sync_time():
     """
     读取最近一次 sync_daily.py 成功运行时间
+    【完全动态读取】每次调用都重新定位并读取文件
     """
-    project_root = get_project_root()
+    # 获取当前脚本所在目录（scripts/）
+    current_script_dir = os.path.dirname(os.path.abspath(__file__))
+    # 脚本目录的父目录就是项目根目录
+    project_root = os.path.dirname(current_script_dir)
     path = os.path.join(project_root, "last_sync_time.txt")
 
     if not os.path.exists(path):
@@ -281,8 +299,9 @@ class LOFArbitrageAnalyzer:
         self.lof_data = self._load_data_if_needed()
         
         signals = []
-        project_root = get_project_root()
-        cache_path = get_cache_path(project_root)
+        # 关键修改：使用动态查找的最新缓存文件路径
+        cache_path = get_latest_cache_path()
+        
         fund_purchase_df = pd.read_csv(cache_path, dtype={"基金代码": str})
         fund_purchase_df.rename(columns={
             "基金代码": "code",
@@ -335,7 +354,7 @@ def signal_font_color(val):
     return color_map.get(val, "")
 
 # ======================================================
-# Streamlit 页面 (完全未改动)
+# Streamlit 页面 (完全未改动，除了修正第569行引号)
 # ======================================================
 
 def main():
