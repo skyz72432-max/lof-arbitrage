@@ -28,7 +28,7 @@ jobs:
       - name: Bump APP_VERSION
         run: |
           VERSION=$(date -u +"%Y-%m-%d %H:%M UTC")
-          sed -i "s/^APP_VERSION = .*/APP_VERSION = \"$VERSION\"/" LOF_dashboard.py
+          sed -i "s/^APP_VERSION = .*/APP_VERSION = \"$VERSION\"/" scripts/LOF_dashboard.py
           echo "APP_VERSION bumped to $VERSION"
           
       - name: Configure Git, Stage & Commit Local Changes
