@@ -55,6 +55,7 @@ def score_to_signal(score):
     else:
         return "放弃"
 
+@st.cache_data(ttl=30, show_spinner=False) 
 def get_last_sync_time():
     """
     读取最近一次 sync_daily.py 成功运行时间
