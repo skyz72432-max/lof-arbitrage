@@ -30,7 +30,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           # 检查是否有文件变动，有则提交
-          git add data/ last_sync_time.txt
+          git add data/ last_sync_time.txt fund_purchase_em_*.csv
           git diff --staged --quiet || (git commit -m "🤖 Auto sync: update LOF data and timestamp" && echo "Changes committed")
 
       - name: Push Changes
