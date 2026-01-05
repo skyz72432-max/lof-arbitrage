@@ -105,7 +105,6 @@ class LOFArbitrageAnalyzer:
         return lof_data
 
     def premium_stats(self, df, days):
-        # 这个方法保持不变，因为它是纯计算
         cutoff_cn = datetime.now(ZoneInfo("Asia/Shanghai")) - timedelta(days=days)
         cutoff = cutoff_cn.replace(tzinfo=None)
         d = df[df["price_dt"] >= cutoff]
@@ -118,9 +117,159 @@ class LOFArbitrageAnalyzer:
         # 修改：将 lof_data 作为参数传入，而不是从 self 获取
         df = lof_data[code].copy()
         recent = df.tail(30)
-        # ... (score_one_lof 方法中间的代码全部保持不变) ...
-        # 确保这个方法里所有用到数据的地方都来自参数 `df` 或 `lof_data[code]`
-        # 最后 return 的部分也保持不变
+
+        current = recent.iloc[-1]
+        cur_premium = current["discount_rt"]
+        cur_volume = current["volume"]
+        cur_pct = current["price_pct"]
+
+        stats7 = self.premium_stats(df, 7)
+        stats14 = self.premium_stats(df, 14)
+        stats21 = self.premium_stats(df, 21)
+
+        # ================= 溢价率维度 =================
+        premium_score = 0
+        plus, minus = [], []
+        
+        if cur_premium < 0:
+            minus.append("当前为折价，不适用溢价套利策略")
+        elif pd.notna(cur_premium):
+            premium_score += 60 if cur_premium >= 5 else int(cur_premium * 10)
+
+            if cur_premium > stats7["mean"] + stats7["std"]:
+                premium_score += 5
+                plus.append(f"当前溢价率显著高于7日均值")
+
+            if cur_premium - stats14["mean"] > stats14["std"] * 1.5:
+                premium_score += 5
+                plus.append("当前溢价率显著高于14日均值")
+
+            if cur_premium - stats21["mean"] > stats21["std"] * 2:
+                premium_score += 5
+                plus.append("当前溢价率显著高于21日均值")
+
+            if 10 <= cur_premium < 20:
+                premium_score += 10
+                plus.append("当前溢价率处于10–20%，套利空间充足")
+            elif cur_premium >= 20:
+                premium_score += 20
+                plus.append("当前溢价率≥20%，属于极端溢价空间")
+
+            last3 = recent["discount_rt"].tail(3).values
+
+            if (last3 >= 5).all() and is_monotonic_increasing(last3):
+                premium_score += 15
+                plus.append(
+                    "近3日溢价率均≥5%且逐日上升，套利空间稳步扩张"
+                )
+            elif (last3 >= 5).all():
+                premium_score += 10
+                plus.append(
+                    "近3日溢价率均≥5%，套利空间稳定存在"
+                )
+            elif (last3 >= 3).all():
+                premium_score += 5
+                plus.append(
+                    "近3日溢价率维持在3%–5%，具备溢价套利基础"
+                )
+
+            if is_monotonic_decreasing(last3):
+                premium_score -= 10
+                minus.append(
+                    "溢价率近3日逐日下降，短期套利窗口收敛"
+                )
+            elif recent["discount_rt"].iloc[-1] < recent["discount_rt"].iloc[-2]:
+                premium_score -= 5
+                minus.append(
+                    "溢价率较昨日有所下滑，但尚未连续回落，短期套利动能减弱"
+                )
+
+            if cur_pct <= -9.5:
+                premium_score -= 20
+                minus.append(
+                    "场内价格接近跌停，情绪化抛压显著，套利风险极高"
+                )
+            elif cur_pct <= -8:
+                premium_score -= 15
+                minus.append(
+                    "场内价格跌超8%，恐慌性下跌阶段，溢价稳定性存疑"
+                )
+            elif cur_pct <= -5:
+                premium_score -= 10
+                minus.append(
+                    "场内价格跌超5%，短期情绪偏弱，需防止溢价快速回落"
+                )
+        else:
+            minus.append("当日溢价率缺失，无法进一步分析")
+
+        premium_score = max(0, 0.6*min(100, premium_score))
+
+        # ================= 流动性维度 =================
+        liquidity_score = 0
+
+        # ---------- 基础流动性门槛 ----------
+        if is_pre_order_time():
+            liquidity_window = recent.iloc[-4:-1]   # 不含今日
+        else:
+            liquidity_window = recent.iloc[-3:]     # 含今日
+
+        if len(liquidity_window) == 3 and \
+        (liquidity_window["volume"] >= 1000).all() and \
+        (liquidity_window["amount"] >= 1000).all():
+
+            liquidity_score += 60
+            plus.append("近3日成交额均≥1000万元，场内份额均≥1000万份，具备套利执行基础")
+
+            # ---------- 加分条件：份额稳定性 ----------
+            amount_incr_today = current["amount_incr"]
+            last3_amount_incr = recent["amount_incr"].tail(3).values
+
+            if abs(amount_incr_today) < 1:
+                liquidity_score += 5
+                plus.append(
+                    "当日场内份额增速绝对值<1%，套利盘未明显集中进出"
+                )
+
+            if (np.abs(last3_amount_incr) < 1).all():
+                liquidity_score += 15
+                plus.append(
+                    "近3日份额增速绝对值均<1%，份额结构高度稳定"
+                )
+
+            # ---------- 扣分条件：套利机会快速消失 ----------
+            last3_premium = recent["discount_rt"].tail(3).values
+
+            if amount_incr_today > 3 and is_monotonic_decreasing(last3_premium):
+                liquidity_score -= 20
+                minus.append(
+                    "当日场内份额增速>3% 且溢价率连续回落，套利盘加速撤离"
+                )
+
+        else:
+            minus.append(
+                "近3日成交额或场内份额不足，存在较大的流动性风险，套利需谨慎"
+            )
+
+        liquidity_score = max(0, 0.5*min(80, liquidity_score))
+
+        total_score = int(premium_score + liquidity_score)
+
+        return {
+            "code": code,
+            "score": total_score,
+            "signal": score_to_signal(total_score),
+            "current_premium": cur_premium,
+            "current_volume": cur_volume,
+            "price_pct": cur_pct,
+            "key_metrics": {
+                "premium_3d": recent["discount_rt"].tail(3).mean(),
+                "premium_7d": recent["discount_rt"].tail(7).mean()
+            },
+            "reasons": {
+                "plus": plus,
+                "minus": minus
+            }
+        }
 
     @st.cache_data(ttl=300, show_spinner=False)
     def get_all_signals(_self):
