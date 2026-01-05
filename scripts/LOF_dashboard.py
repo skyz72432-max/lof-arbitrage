@@ -272,6 +272,7 @@ class LOFArbitrageAnalyzer:
         
     @st.cache_data(ttl=30, show_spinner=False)
     def get_all_signals(self):
+        self.lof_data = self.load_all_data(self.data_dir)
         signals = []
         project_root = get_project_root()
         cache_path = get_cache_path(project_root)
@@ -332,13 +333,12 @@ def signal_font_color(val):
 
 def main():
     st_autorefresh(interval= 5 * 60 * 1000, key="auto_refresh")
-    st.cache_data.clear()
     st.set_page_config(
         page_title="LOF溢价套利【每日机会】",
         page_icon="📈",
         layout="wide"
     )
-
+    st.cache_data.clear()
     st.title("📈 LOF 溢价套利【每日机会】")
     st.markdown("### 基于行情数据，寻找套利机会，盘中实时更新")
     st.caption(f"🕒 最后更新时间：{get_last_sync_time()}")
