@@ -1,72 +1,65 @@
 name: Sync Daily Job
 
-# 触发条件
 on:
-  workflow_dispatch: # 手动触发
+  workflow_dispatch:
 
 jobs:
   run-sync:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ 拉取仓库最新代码
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2️⃣ 设置 Python 环境
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
-      # 3️⃣ 安装依赖包
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 4️⃣ 执行 sync_daily.py 脚本（同步每日数据）
+      # 1️⃣ 同步 LOF 数据
       - name: Run sync_daily.py
         run: |
           python scripts/sync_daily.py
 
-      # 5️⃣ 执行 fetch_fund_purchase.py（获取基金申购数据，并生成/更新 CSV）
+      # 2️⃣ 获取基金申购数据
       - name: Run fetch_fund_purchase.py
         run: |
           python scripts/fetch_fund_purchase.py
 
-      # 6️⃣ 更新 APP_VERSION，确保 Streamlit Cloud 页面自动重载
+      # 3️⃣ bump APP_VERSION（触发 Streamlit reload）
       - name: Bump APP_VERSION
         run: |
-          # 使用 UTC 当前时间作为版本号
           VERSION=$(date -u +"%Y-%m-%d %H:%M UTC")
-          # 替换 LOF_dashboard.py 中的 APP_VERSION
           sed -i "s/^APP_VERSION = .*/APP_VERSION = \"$VERSION\"/" scripts/LOF_dashboard.py
           echo "APP_VERSION bumped to $VERSION"
 
-      # 7️⃣ 提交并推送所有变化，包括新增文件、修改文件、删除旧文件
-      - name: Commit & Push Changes (include deletions)
+      # 4️⃣ 提交本地变更
+      - name: Commit local changes
         env:
           MY_TOKEN: ${{ secrets.LOF_PUSH_TOKEN }}
         run: |
-          # 配置 Git 用户信息
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions"
+          git config --global user.name "github-actions[bot]"
 
-          # 设置远程仓库地址，使用 secrets 中的 token
           git remote set-url origin "https://x-access-token:${MY_TOKEN}@github.com/skyz72432-max/lof-arbitrage.git"
 
-          echo "📂 提交前查看 Git 状态："
-          git status
+          git add data/ last_sync_time.txt fund_purchase_em_*.csv scripts/LOF_dashboard.py
 
-          # ⭐ 关键步骤：包含新增 / 修改 / 删除
-          git add -A
+          if git diff --staged --quiet; then
+            echo "🟡 No changes to commit"
+          else
+            git commit -m "🤖 Auto sync: daily data & fund purchase update"
+          fi
 
-          # 再次查看状态，确保文件已添加
-          git status
-
-          # 提交变更，如果没有任何变动则不会报错
-          git commit -m "🤖 Auto sync: daily data & fund purchase update $(date +'%Y%m%d')" || echo "🟡 No changes to commit"
-
-          # 推送到远程仓库
-          git push origin main || echo "🟡 Nothing pushed"
+      # 5️⃣ rebase + push
+      - name: Pull & Push
+        env:
+          MY_TOKEN: ${{ secrets.LOF_PUSH_TOKEN }}
+        run: |
+          git pull origin main --rebase --autostash
+          git push origin main
