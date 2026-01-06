@@ -1,0 +1,38 @@
+name: Update fund_purchase_em
+
+on:
+  schedule:
+    - cron: "30 0 * * *"   # 北京时间 08:30
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install akshare pandas
+
+      - name: Run fetch script
+        run: |
+          python scripts/fetch_fund_purchase.py
+
+      - name: Commit changes (including deletions)
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
+          git status
+
+          git add -A   # ⭐ 关键：包含删除
+          git commit -m "update fund_purchase_em $(date +'%Y%m%d')" || echo "No changes"
+          git push
