@@ -483,8 +483,10 @@ def main():
             
             fig = go.Figure()
             
+            # --------------------------
+            # 溢价率曲线
+            # --------------------------
             if chart_type == "溢价率":
-                # 溢价率曲线
                 fig.add_trace(go.Scatter(
                     x=df['price_dt'],
                     y=df['discount_rt'],
@@ -493,7 +495,7 @@ def main():
                     line=dict(color='blue', width=2)
                 ))
                 
-                # 根据checkbox显示均线
+                # 均线
                 if show_7d:
                     df['ma7'] = df['discount_rt'].rolling(window=7).mean()
                     fig.add_trace(go.Scatter(
@@ -503,7 +505,6 @@ def main():
                         name='7日均线',
                         line=dict(color='red', width=1, dash='dash')
                     ))
-                
                 if show_14d:
                     df['ma14'] = df['discount_rt'].rolling(window=14).mean()
                     fig.add_trace(go.Scatter(
@@ -513,7 +514,6 @@ def main():
                         name='14日均线',
                         line=dict(color='green', width=1, dash='dash')
                     ))
-                
                 if show_21d:
                     df['ma21'] = df['discount_rt'].rolling(window=21).mean()
                     fig.add_trace(go.Scatter(
@@ -523,15 +523,17 @@ def main():
                         name='21日均线',
                         line=dict(color='orange', width=1, dash='dash')
                     ))
-                
+            
                 fig.update_layout(
                     title=f"{selected_code} 溢价率趋势",
                     yaxis_title="溢价率 (%)",
                     height=400
                 )
-                
+            
+            # --------------------------
+            # 价格曲线
+            # --------------------------
             elif chart_type == "价格":
-                # 价格曲线
                 fig.add_trace(go.Scatter(
                     x=df['price_dt'],
                     y=df['price'],
@@ -540,7 +542,7 @@ def main():
                     line=dict(color='orange', width=2)
                 ))
                 
-                # 根据checkbox显示价格均线
+                # 均线
                 if show_7d:
                     df['price_ma7'] = df['price'].rolling(window=7).mean()
                     fig.add_trace(go.Scatter(
@@ -550,7 +552,6 @@ def main():
                         name='7日均线',
                         line=dict(color='purple', width=1, dash='dash')
                     ))
-                
                 if show_14d:
                     df['price_ma14'] = df['price'].rolling(window=14).mean()
                     fig.add_trace(go.Scatter(
@@ -560,7 +561,6 @@ def main():
                         name='14日均线',
                         line=dict(color='brown', width=1, dash='dash')
                     ))
-                
                 if show_21d:
                     df['price_ma21'] = df['price'].rolling(window=21).mean()
                     fig.add_trace(go.Scatter(
@@ -570,16 +570,17 @@ def main():
                         name='21日均线',
                         line=dict(color='pink', width=1, dash='dash')
                     ))
-                
+            
                 fig.update_layout(
                     title=f"{selected_code} 价格趋势",
                     yaxis_title="价格 (元)",
                     height=400
                 )
-                
-            else:  # 双轴对比
-                fig = go.Figure()
-                
+            
+            # --------------------------
+            # 双轴对比
+            # --------------------------
+            else:
                 # 左轴折线图：价格
                 fig.add_trace(go.Scatter(
                     x=df['price_dt'],
@@ -591,6 +592,8 @@ def main():
                 ))
                 
                 # 左轴折线图：基金净值
+                if 'net_value' not in df.columns:
+                    df['net_value'] = df['price']  # 占位
                 fig.add_trace(go.Scatter(
                     x=df['price_dt'],
                     y=df['net_value'],
@@ -600,89 +603,48 @@ def main():
                     yaxis='y'
                 ))
                 
-                # 右轴柱状图：溢价率，颜色正红负绿
+                # 右轴柱状图：溢价率
                 colors = ['red' if val >= 0 else 'green' for val in df['discount_rt']]
-                
-                # 文本显示：正值在柱子上方，负值在柱子下方
-                text_positions = ['outside' for _ in df['discount_rt']]  # 全部设置 outside
-                text_templates = [f'{val:.2f}' for val in df['discount_rt']]  # 文本内容
-                
-                # 添加柱状图
                 fig.add_trace(go.Bar(
                     x=df['price_dt'],
                     y=df['discount_rt'],
                     name='溢价率',
                     marker_color=colors,
                     yaxis='y2',
-                    text=text_templates,
-                    textposition=text_positions,
+                    text=df['discount_rt'].round(2),
+                    textposition='outside',
                     textfont=dict(color=['red' if val >= 0 else 'green' for val in df['discount_rt']])
                 ))
                 
-                # 负值文本下移
-                fig.update_traces(
-                    selector=dict(type='bar'),
-                    texttemplate='%{text}',
-                    textposition='outside'
-                )
-                
-                # 布局设置
+                # y轴刻度数量一致
+                fig.update_yaxes(title_text="价格 (元)", side="left", tickfont=dict(size=12), nticks=8)
+                fig.update_yaxes(title_text="溢价率 (%)", side="right", overlaying="y", tickfont=dict(size=12), nticks=8)
+            
                 fig.update_layout(
                     title=f"{selected_code} 价格、基金净值与溢价率对比",
-                    xaxis=dict(
-                        tickformat="%Y-%m-%d",
-                        tickangle=0,
-                        tickfont=dict(size=12)
-                    ),
-                    yaxis=dict(
-                        title="价格 (元)",
-                        side="left",
-                        tickfont=dict(size=12)
-                    ),
-                    yaxis2=dict(
-                        title="溢价率 (%)",
-                        side="right",
-                        overlaying="y",
-                        tickfont=dict(size=12)
-                    ),
-                    legend=dict(
-                        orientation="h",
-                        yanchor="bottom",
-                        y=1.08,
-                        xanchor="center",
-                        x=0.5,
-                        font=dict(size=14)
-                    ),
-                    margin=dict(t=80),
-                    height=400,
-                    barmode='overlay'
+                    barmode='overlay',
+                    height=400
                 )
-                
+            
+            # --------------------------
+            # 公共布局
+            # --------------------------
             fig.update_layout(
+                xaxis=dict(
+                    type='category',  # 按实际交易日绘制，不空出缺失日期
+                    tickfont=dict(size=12)
+                ),
                 legend=dict(
-                    orientation="h",       # 横向图例
+                    orientation="h",
                     yanchor="bottom",
-                    y=1.08,                # 图像正上方
+                    y=1.08,
                     xanchor="center",
                     x=0.5,
-                    font=dict(size=14)     # 图例字体
+                    font=dict(size=14)
                 ),
-                xaxis=dict(
-                    tickfont=dict(size=12)
-                ),
-                yaxis=dict(
-                    tickfont=dict(size=12)
-                ),
-                yaxis2=dict(
-                    tickfont=dict(size=12)
-                ),
-                margin=dict(t=80)          # 给顶部图例留空间
+                margin=dict(t=80)
             )
-
-            fig.update_xaxes(
-                tickformat="%Y-%m-%d",     # 日期格式
-                tickangle=0
-            )
+            
             st.plotly_chart(fig, use_container_width=True)
 
         with st.expander("🧮 详细数据", expanded=True):
