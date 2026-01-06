@@ -602,7 +602,7 @@ def main():
                 fig.add_trace(go.Bar(
                     x=df['price_dt_str'],
                     y=df['discount_rt'],
-                    name='溢价率',
+                    name='溢价率(右轴)',
                     marker_color=colors,
                     opacity=0.6,
                     yaxis='y2',
@@ -611,11 +611,10 @@ def main():
                 ))
             
                 fig.update_layout(
-                    title=f"{selected_code} 溢价对比",
+                    title=f"{selected_code} 价格 vs 净值",
                     # 左轴：价格 & 净值（不画网格）
                     yaxis=dict(
                         title="价格(元)",
-                        nticks=6,
                         showgrid=False,
                         zeroline=False
                     ),
@@ -625,7 +624,6 @@ def main():
                         title="溢价率(%)",
                         overlaying='y',
                         side='right',
-                        nticks=6,
                         showgrid=True,    # 只画右轴网格
                         gridcolor='rgba(200,200,200,0.45)',
                         zeroline=True,
