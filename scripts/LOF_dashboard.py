@@ -658,7 +658,32 @@ def main():
                     barmode='overlay'
                 )
                 
-                st.plotly_chart(fig, use_container_width=True)
+            fig.update_layout(
+                legend=dict(
+                    orientation="h",       # 横向图例
+                    yanchor="bottom",
+                    y=1.08,                # 图像正上方
+                    xanchor="center",
+                    x=0.5,
+                    font=dict(size=14)     # 图例字体
+                ),
+                xaxis=dict(
+                    tickfont=dict(size=12)
+                ),
+                yaxis=dict(
+                    tickfont=dict(size=12)
+                ),
+                yaxis2=dict(
+                    tickfont=dict(size=12)
+                ),
+                margin=dict(t=80)          # 给顶部图例留空间
+            )
+
+            fig.update_xaxes(
+                tickformat="%Y-%m-%d",     # 日期格式
+                tickangle=0
+            )
+            st.plotly_chart(fig, use_container_width=True)
 
         with st.expander("🧮 详细数据", expanded=True):
             display_df = df[['fund_id','price_dt','price','net_value','est_val','discount_rt','volume','amount','amount_incr']].copy()
