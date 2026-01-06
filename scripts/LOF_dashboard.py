@@ -41,7 +41,7 @@ def now_cn():
 
 def is_pre_order_time():
     now = now_cn().time()
-    return time(9, 30) <= now <= time(14, 30)
+    return time(9, 30) <= now <= time(14, 00)
 
 def score_to_signal(score):
     if score >= 80:
@@ -104,9 +104,10 @@ class LOFArbitrageAnalyzer:
         return lof_data
 
     def premium_stats(self, df, days):
-        cutoff_cn = datetime.now(ZoneInfo("Asia/Shanghai")) - timedelta(days=days)
-        cutoff = cutoff_cn.replace(tzinfo=None)
-        d = df[df["price_dt"] >= cutoff]
+        #cutoff_cn = datetime.now(ZoneInfo("Asia/Shanghai")) - timedelta(days=days)
+        #cutoff = cutoff_cn.replace(tzinfo=None)
+        #d = df[df["price_dt"] >= cutoff]
+        d = df.tail(days)
         return {
             "mean": d["discount_rt"].mean(),
             "std": d["discount_rt"].std()
@@ -122,9 +123,9 @@ class LOFArbitrageAnalyzer:
         cur_volume = current["volume"]
         cur_pct = current["price_pct"]
 
-        stats7 = self.premium_stats(df, 7)
-        stats14 = self.premium_stats(df, 14)
-        stats21 = self.premium_stats(df, 21)
+        stats7 = self.premium_stats(df, 5)
+        stats14 = self.premium_stats(df, 10)
+        stats21 = self.premium_stats(df, 15)
 
         # ================= 溢价率维度 =================
         premium_score = 0
@@ -137,15 +138,15 @@ class LOFArbitrageAnalyzer:
 
             if cur_premium > stats7["mean"] + stats7["std"]:
                 premium_score += 5
-                plus.append(f"当前溢价率显著高于7日均值")
+                plus.append(f"当前溢价率显著高于5日均值")
 
             if cur_premium - stats14["mean"] > stats14["std"] * 1.5:
                 premium_score += 5
-                plus.append("当前溢价率显著高于14日均值")
+                plus.append("当前溢价率显著高于10日均值")
 
             if cur_premium - stats21["mean"] > stats21["std"] * 2:
                 premium_score += 5
-                plus.append("当前溢价率显著高于21日均值")
+                plus.append("当前溢价率显著高于15日均值")
 
             if 10 <= cur_premium < 20:
                 premium_score += 10
@@ -262,7 +263,7 @@ class LOFArbitrageAnalyzer:
             "price_pct": cur_pct,
             "key_metrics": {
                 "premium_3d": recent["discount_rt"].tail(3).mean(),
-                "premium_7d": recent["discount_rt"].tail(7).mean()
+                "premium_5d": recent["discount_rt"].tail(5).mean()
             },
             "reasons": {
                 "plus": plus,
@@ -438,7 +439,7 @@ def main():
             with c1:
                 st.metric("当前溢价率", f"{s['current_premium']:.2f}%")
                 st.metric("近3日平均溢价", f"{s['key_metrics']['premium_3d']:.2f}%")
-                st.metric("近7日平均溢价", f"{s['key_metrics']['premium_7d']:.2f}%")
+                st.metric("近5日平均溢价", f"{s['key_metrics']['premium_5d']:.2f}%")
 
             with c2:
                 st.metric("最新涨跌幅", f"{s['price_pct']:.2f}%")
@@ -473,9 +474,9 @@ def main():
         with col_settings2:
             st.write("均线设置")
             cols = st.columns([1, 1, 1])
-            show_7d  = cols[0].checkbox("7日均线", True, key="chart_7d")
-            show_14d = cols[1].checkbox("14日均线", True, key="chart_14d")
-            show_21d = cols[2].checkbox("21日均线", False, key="chart_21d")
+            show_7d  = cols[0].checkbox("5日均线", True, key="chart_7d")
+            show_14d = cols[1].checkbox("10日均线", True, key="chart_14d")
+            show_21d = cols[2].checkbox("15日均线", False, key="chart_21d")
         
         if selected_code in lof_data:
             df = lof_data[selected_code]
@@ -499,27 +500,27 @@ def main():
                 if show_7d:
                     fig.add_trace(go.Scatter(
                         x=df['price_dt_str'],
-                        y=df['discount_rt'].rolling(7).mean(),
+                        y=df['discount_rt'].rolling(5).mean(),
                         mode='lines',
-                        name='7日均线',
+                        name='5日均线',
                         line=dict(color='red', dash='dash')
                     ))
             
                 if show_14d:
                     fig.add_trace(go.Scatter(
                         x=df['price_dt_str'],
-                        y=df['discount_rt'].rolling(14).mean(),
+                        y=df['discount_rt'].rolling(10).mean(),
                         mode='lines',
-                        name='14日均线',
+                        name='10日均线',
                         line=dict(color='green', dash='dash')
                     ))
             
                 if show_21d:
                     fig.add_trace(go.Scatter(
                         x=df['price_dt_str'],
-                        y=df['discount_rt'].rolling(21).mean(),
+                        y=df['discount_rt'].rolling(15).mean(),
                         mode='lines',
-                        name='21日均线',
+                        name='15日均线',
                         line=dict(color='orange', dash='dash')
                     ))
             
@@ -544,27 +545,27 @@ def main():
                 if show_7d:
                     fig.add_trace(go.Scatter(
                         x=df['price_dt_str'],
-                        y=df['price'].rolling(7).mean(),
+                        y=df['price'].rolling(5).mean(),
                         mode='lines',
-                        name='7日均线',
+                        name='5日均线',
                         line=dict(color='purple', dash='dash')
                     ))
             
                 if show_14d:
                     fig.add_trace(go.Scatter(
                         x=df['price_dt_str'],
-                        y=df['price'].rolling(14).mean(),
+                        y=df['price'].rolling(10).mean(),
                         mode='lines',
-                        name='14日均线',
+                        name='10日均线',
                         line=dict(color='brown', dash='dash')
                     ))
             
                 if show_21d:
                     fig.add_trace(go.Scatter(
                         x=df['price_dt_str'],
-                        y=df['price'].rolling(21).mean(),
+                        y=df['price'].rolling(15).mean(),
                         mode='lines',
-                        name='21日均线',
+                        name='15日均线',
                         line=dict(color='pink', dash='dash')
                     ))
             
