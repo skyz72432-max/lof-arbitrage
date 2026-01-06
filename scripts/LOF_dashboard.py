@@ -478,7 +478,6 @@ def main():
         if selected_code in lof_data:
             df = lof_data[selected_code]
             df['discount_rt'] = df['discount_rt'].fillna(((df['price'] / df['est_val'] - 1) * 100).round(2))
-            df['net_value'] = df['net_value'].fillna(df['est_val'])
             df['price_dt_str'] = df['price_dt'].dt.strftime('%Y-%m-%d')
             
             fig = go.Figure()
@@ -590,7 +589,7 @@ def main():
                 # 左轴：基金净值
                 fig.add_trace(go.Scatter(
                     x=df['price_dt_str'],
-                    y=df['net_value'],
+                    y=df['net_value'].fillna(df['est_val']),
                     mode='lines+markers',
                     name='净值',
                     line=dict(color='blue', width=2),
