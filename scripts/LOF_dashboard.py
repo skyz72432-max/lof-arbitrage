@@ -580,66 +580,85 @@ def main():
             else:  # 双轴对比
                 fig = go.Figure()
                 
-                # 价格轴 (左)
+                # 左轴折线图：价格
                 fig.add_trace(go.Scatter(
                     x=df['price_dt'],
                     y=df['price'],
                     mode='lines+markers',
-                    name='收盘价',
+                    name='价格',
                     line=dict(color='orange', width=2),
                     yaxis='y'
                 ))
                 
-                # 溢价率轴 (右)
+                # 左轴折线图：基金净值
                 fig.add_trace(go.Scatter(
                     x=df['price_dt'],
-                    y=df['discount_rt'],
+                    y=df['net_value'],
                     mode='lines+markers',
-                    name='溢价率',
+                    name='基金净值',
                     line=dict(color='blue', width=2),
-                    yaxis='y2'
+                    yaxis='y'
                 ))
                 
+                # 右轴柱状图：溢价率，颜色正红负绿
+                colors = ['red' if val >= 0 else 'green' for val in df['discount_rt']]
+                
+                # 文本显示：正值在柱子上方，负值在柱子下方
+                text_positions = ['outside' for _ in df['discount_rt']]  # 全部设置 outside
+                text_templates = [f'{val:.2f}' for val in df['discount_rt']]  # 文本内容
+                
+                # 添加柱状图
+                fig.add_trace(go.Bar(
+                    x=df['price_dt'],
+                    y=df['discount_rt'],
+                    name='溢价率',
+                    marker_color=colors,
+                    yaxis='y2',
+                    text=text_templates,
+                    textposition=text_positions,
+                    textfont=dict(color=['red' if val >= 0 else 'green' for val in df['discount_rt']])
+                ))
+                
+                # 负值文本下移
+                fig.update_traces(
+                    selector=dict(type='bar'),
+                    texttemplate='%{text}',
+                    textposition='outside'
+                )
+                
+                # 布局设置
                 fig.update_layout(
-                    title=f"{selected_code} 价格与溢价率对比",
+                    title=f"{selected_code} 价格、基金净值与溢价率对比",
+                    xaxis=dict(
+                        tickformat="%Y-%m-%d",
+                        tickangle=0,
+                        tickfont=dict(size=12)
+                    ),
                     yaxis=dict(
                         title="价格 (元)",
-                        side="left"
+                        side="left",
+                        tickfont=dict(size=12)
                     ),
                     yaxis2=dict(
                         title="溢价率 (%)",
                         side="right",
-                        overlaying="y"
+                        overlaying="y",
+                        tickfont=dict(size=12)
                     ),
-                    height=400
+                    legend=dict(
+                        orientation="h",
+                        yanchor="bottom",
+                        y=1.08,
+                        xanchor="center",
+                        x=0.5,
+                        font=dict(size=14)
+                    ),
+                    margin=dict(t=80),
+                    height=400,
+                    barmode='overlay'
                 )
-            
-            fig.update_layout(
-                legend=dict(
-                    orientation="h",       # 横向图例
-                    yanchor="bottom",
-                    y=1.08,                # 图像正上方
-                    xanchor="center",
-                    x=0.5,
-                    font=dict(size=14)     # 图例字体
-                ),
-                xaxis=dict(
-                    tickfont=dict(size=12)
-                ),
-                yaxis=dict(
-                    tickfont=dict(size=12)
-                ),
-                yaxis2=dict(
-                    tickfont=dict(size=12)
-                ),
-                margin=dict(t=80)          # 给顶部图例留空间
-            )
-
-            fig.update_xaxes(
-                tickformat="%Y-%m-%d",     # 日期格式
-                tickangle=0
-            )
-            st.plotly_chart(fig, use_container_width=True)
+                
+                st.plotly_chart(fig, use_container_width=True)
 
         with st.expander("🧮 详细数据", expanded=True):
             display_df = df[['fund_id','price_dt','price','net_value','est_val','discount_rt','volume','amount','amount_incr']].copy()
