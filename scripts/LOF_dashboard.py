@@ -347,7 +347,7 @@ def main():
     )
     st.cache_data.clear()
     st.title("📈 LOF 溢价套利【每日机会】")
-    st.markdown("### 基于行情数据，寻找套利机会，盘中实时更新")
+    st.markdown("### 基于行情数据，寻找套利机会，盘中定时更新")
     st.caption(f"🕒 最后更新时间：{get_last_sync_time()}")
     
     analyzer = LOFArbitrageAnalyzer()
