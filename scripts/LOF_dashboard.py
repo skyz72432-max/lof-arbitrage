@@ -480,6 +480,10 @@ def main():
             #if pd.isna(df['discount_rt'].iloc[-1]):
             #    df['discount_rt'].iloc[-1] = round((df['price'].iloc[-1]/df['est_val'].iloc[-1]-1)*100,2)
             df['discount_rt'] = df['discount_rt'].fillna(((df['price'] / df['est_val'] - 1) * 100).round(2))
+            df['net_value'] = df['net_value'].fillna(df['est_val'])
+            
+            # 先转换price_dt为字符串
+            df['price_dt_str'] = df['price_dt'].dt.strftime('%Y-%m-%d')
             
             fig = go.Figure()
             
@@ -488,7 +492,7 @@ def main():
             # --------------------------
             if chart_type == "溢价率":
                 fig.add_trace(go.Scatter(
-                    x=df['price_dt'],
+                    x=df['price_dt_str'],
                     y=df['discount_rt'],
                     mode='lines+markers',
                     name='溢价率',
@@ -499,7 +503,7 @@ def main():
                 if show_7d:
                     df['ma7'] = df['discount_rt'].rolling(window=7).mean()
                     fig.add_trace(go.Scatter(
-                        x=df['price_dt'],
+                        x=df['price_dt_str'],
                         y=df['ma7'],
                         mode='lines',
                         name='7日均线',
@@ -508,7 +512,7 @@ def main():
                 if show_14d:
                     df['ma14'] = df['discount_rt'].rolling(window=14).mean()
                     fig.add_trace(go.Scatter(
-                        x=df['price_dt'],
+                        x=df['price_dt_str'],
                         y=df['ma14'],
                         mode='lines',
                         name='14日均线',
@@ -517,7 +521,7 @@ def main():
                 if show_21d:
                     df['ma21'] = df['discount_rt'].rolling(window=21).mean()
                     fig.add_trace(go.Scatter(
-                        x=df['price_dt'],
+                        x=df['price_dt_str'],
                         y=df['ma21'],
                         mode='lines',
                         name='21日均线',
@@ -535,18 +539,17 @@ def main():
             # --------------------------
             elif chart_type == "价格":
                 fig.add_trace(go.Scatter(
-                    x=df['price_dt'],
+                    x=df['price_dt_str'],
                     y=df['price'],
                     mode='lines+markers',
                     name='收盘价',
                     line=dict(color='orange', width=2)
                 ))
                 
-                # 均线
                 if show_7d:
                     df['price_ma7'] = df['price'].rolling(window=7).mean()
                     fig.add_trace(go.Scatter(
-                        x=df['price_dt'],
+                        x=df['price_dt_str'],
                         y=df['price_ma7'],
                         mode='lines',
                         name='7日均线',
@@ -555,7 +558,7 @@ def main():
                 if show_14d:
                     df['price_ma14'] = df['price'].rolling(window=14).mean()
                     fig.add_trace(go.Scatter(
-                        x=df['price_dt'],
+                        x=df['price_dt_str'],
                         y=df['price_ma14'],
                         mode='lines',
                         name='14日均线',
@@ -564,7 +567,7 @@ def main():
                 if show_21d:
                     df['price_ma21'] = df['price'].rolling(window=21).mean()
                     fig.add_trace(go.Scatter(
-                        x=df['price_dt'],
+                        x=df['price_dt_str'],
                         y=df['price_ma21'],
                         mode='lines',
                         name='21日均线',
@@ -583,7 +586,7 @@ def main():
             else:
                 # 左轴折线图：价格
                 fig.add_trace(go.Scatter(
-                    x=df['price_dt'],
+                    x=df['price_dt_str'],
                     y=df['price'],
                     mode='lines+markers',
                     name='价格',
@@ -592,10 +595,8 @@ def main():
                 ))
                 
                 # 左轴折线图：基金净值
-                if 'net_value' not in df.columns:
-                    df['net_value'] = df['price']  # 占位
                 fig.add_trace(go.Scatter(
-                    x=df['price_dt'],
+                    x=df['price_dt_str'],
                     y=df['net_value'],
                     mode='lines+markers',
                     name='基金净值',
@@ -606,23 +607,22 @@ def main():
                 # 右轴柱状图：溢价率
                 colors = ['red' if val >= 0 else 'green' for val in df['discount_rt']]
                 fig.add_trace(go.Bar(
-                    x=df['price_dt'],
+                    x=df['price_dt_str'],
                     y=df['discount_rt'],
                     name='溢价率',
                     marker_color=colors,
                     yaxis='y2',
                     text=df['discount_rt'].round(2),
                     textposition='outside',
-                    textfont=dict(color=['red' if val >= 0 else 'green' for val in df['discount_rt']])
+                    opacity=0.6  # 防止折线被柱子覆盖
                 ))
                 
-                # y轴刻度数量一致
-                fig.update_yaxes(title_text="价格 (元)", side="left", tickfont=dict(size=12), nticks=8)
-                fig.update_yaxes(title_text="溢价率 (%)", side="right", overlaying="y", tickfont=dict(size=12), nticks=8)
+                # 左右轴刻度数量一致
+                fig.update_yaxes(title_text="价格(元)", side="left", tickfont=dict(size=12), nticks=5)
+                fig.update_yaxes(title_text="溢价率(%)", side="right", overlaying="y", tickfont=dict(size=12), nticks=5)
             
                 fig.update_layout(
-                    title=f"{selected_code} 价格、基金净值与溢价率对比",
-                    barmode='overlay',
+                    title=f"{selected_code} 双轴对比",
                     height=400
                 )
             
@@ -631,7 +631,7 @@ def main():
             # --------------------------
             fig.update_layout(
                 xaxis=dict(
-                    type='category',  # 按实际交易日绘制，不空出缺失日期
+                    type='category',  # 按实际交易日绘制
                     tickfont=dict(size=12)
                 ),
                 legend=dict(
