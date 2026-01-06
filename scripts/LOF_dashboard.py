@@ -611,17 +611,27 @@ def main():
                 ))
             
                 fig.update_layout(
-                    title=f"{selected_code} 双轴对比",
+                    title=f"{selected_code} 溢价对比",
+                    # 左轴：价格 & 净值（不画网格）
                     yaxis=dict(
                         title="价格(元)",
-                        nticks=5
+                        nticks=6,
+                        showgrid=False,
+                        zeroline=False
                     ),
+                
+                    # 右轴：溢价率（唯一的辅助线来源）
                     yaxis2=dict(
                         title="溢价率(%)",
                         overlaying='y',
                         side='right',
-                        nticks=5
+                        nticks=6,
+                        showgrid=True,    # 只画右轴网格
+                        gridcolor='rgba(200,200,200,0.45)',
+                        zeroline=True,
+                        zerolinecolor='rgba(120,120,120,0.6)'
                     ),
+                    
                     height=400
                 )
             
