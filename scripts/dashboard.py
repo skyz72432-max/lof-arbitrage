@@ -19,7 +19,7 @@ def main():
     st_autorefresh(interval=5 * 60 * 1000, key="auto_refresh") # ✅ 5min自动刷新（最先执行）
     st.cache_data.clear()   # 👈 强制每次重算
     st.set_page_config(
-        page_title="LOF溢价率交易仪表板",
+        page_title="LOF溢价率交易仪表板2",
         page_icon="📈",
         layout="wide"
     )
