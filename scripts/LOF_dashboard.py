@@ -97,8 +97,7 @@ class LOFArbitrageAnalyzer:
                 df['price_dt'] = pd.to_datetime(df['price_dt'])
                 df['discount_rt'] = pd.to_numeric(df['discount_rt'], errors='coerce')
                 df["price_pct"] = df["price"].pct_change() * 100
-                if pd.isna(df['discount_rt'].iloc[-1]):
-                    df['discount_rt'].iloc[-1] = round((df['price'].iloc[-1]/df['est_val'].iloc[-1]-1)*100,2)
+                df['discount_rt'] = df['discount_rt'].fillna(((df['price'] / df['est_val'] - 1) * 100).round(2))
                 lof_data[code] = df.sort_values('price_dt')
             except Exception as e:
                 print(f"加载 {code} 数据失败: {e}")
@@ -478,8 +477,9 @@ def main():
         
         if selected_code in lof_data:
             df = lof_data[selected_code]
-            if pd.isna(df['discount_rt'].iloc[-1]):
-                df['discount_rt'].iloc[-1] = round((df['price'].iloc[-1]/df['est_val'].iloc[-1]-1)*100,2)
+            #if pd.isna(df['discount_rt'].iloc[-1]):
+            #    df['discount_rt'].iloc[-1] = round((df['price'].iloc[-1]/df['est_val'].iloc[-1]-1)*100,2)
+            df['discount_rt'] = df['discount_rt'].fillna(((df['price'] / df['est_val'] - 1) * 100).round(2))
             
             fig = go.Figure()
             
