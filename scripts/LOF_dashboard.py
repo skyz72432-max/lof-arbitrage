@@ -880,13 +880,13 @@ def main():
         = 申购费 + 赎回费 + 交易佣金 + 时间成本
         """)
 
-    with st.expander("九、卖出时机策略"):
+    with st.expander("九、卖出时机建议"):
         st.markdown("### 🔹 基本原则")
         st.markdown("""
         - 到账后开盘即卖，降低不确定性风险
         """)
 
-        st.markdown("### 🔹 具体策略")
+        st.markdown("### 🔹 具体建议")
         st.markdown("""
         - **高溢价(> 3%)**：集合竞价挂单  
         - **中等溢价**：早盘观察后决策
