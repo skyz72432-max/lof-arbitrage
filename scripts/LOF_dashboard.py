@@ -492,7 +492,7 @@ def main():
                     y=df['price'],
                     mode='lines+markers',
                     name='价格',
-                    line=dict(color='#FF6F61', width=2),
+                    line=dict(color='#E3B341', width=2),
                     yaxis='y'
                 ))
             
@@ -502,7 +502,7 @@ def main():
                     y=df['net_value'].fillna(df['est_val']),
                     mode='lines+markers',
                     name='净值',
-                    line=dict(color='#C49A6C', width=2),
+                    line=dict(color='#C94C9C', width=2),
                     yaxis='y'
                 ))
             
@@ -596,7 +596,7 @@ def main():
                     y=df['price'],
                     mode='lines+markers',
                     name='价格',
-                    line=dict(color='#FF6F61', width=2)
+                    line=dict(color='#E3B341', width=2)
                 ))
             
                 if show_7d:
@@ -641,7 +641,7 @@ def main():
                     y=df['net_value'].fillna(df['est_val']),
                     mode='lines+markers',
                     name='净值',
-                    line=dict(color='#C49A6C', width=2)
+                    line=dict(color='#C94C9C', width=2)
                 ))
             
                 if show_7d:
