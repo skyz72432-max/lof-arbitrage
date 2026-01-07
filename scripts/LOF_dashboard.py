@@ -104,9 +104,6 @@ class LOFArbitrageAnalyzer:
         return lof_data
 
     def premium_stats(self, df, days):
-        #cutoff_cn = datetime.now(ZoneInfo("Asia/Shanghai")) - timedelta(days=days)
-        #cutoff = cutoff_cn.replace(tzinfo=None)
-        #d = df[df["price_dt"] >= cutoff]
         d = df.tail(days)
         return {
             "mean": d["discount_rt"].mean(),
@@ -153,19 +150,19 @@ class LOFArbitrageAnalyzer:
                 plus.append("当前溢价率处于10–20%，套利空间充足")
             elif cur_premium >= 20:
                 premium_score += 20
-                plus.append("当前溢价率≥20%，属于极端溢价空间")
+                plus.append("当前溢价率 ≥20%，属于极端溢价空间")
 
             last3 = recent["discount_rt"].tail(3).values
 
             if (last3 >= 5).all() and is_monotonic_increasing(last3):
                 premium_score += 15
                 plus.append(
-                    "近3日溢价率均≥5%且逐日上升，套利空间稳步扩张"
+                    "近3日溢价率均 ≥5%且逐日上升，套利空间稳步扩张"
                 )
             elif (last3 >= 5).all():
                 premium_score += 10
                 plus.append(
-                    "近3日溢价率均≥5%，套利空间稳定存在"
+                    "近3日溢价率均 ≥5%，套利空间稳定存在"
                 )
             elif (last3 >= 3).all():
                 premium_score += 5
@@ -218,7 +215,7 @@ class LOFArbitrageAnalyzer:
         (liquidity_window["amount"] >= 1000).all():
 
             liquidity_score += 60
-            plus.append("近3日成交额均≥1000万元，场内份额均≥1000万份，具备套利执行基础")
+            plus.append("近3日成交额均 ≥1000万元，场内份额均 ≥1000万份，具备套利执行基础")
 
             # ---------- 加分条件：份额稳定性 ----------
             amount_incr_today = current["amount_incr"]
@@ -227,13 +224,13 @@ class LOFArbitrageAnalyzer:
             if abs(amount_incr_today) < 1:
                 liquidity_score += 5
                 plus.append(
-                    "当日场内份额增速绝对值<1%，套利盘未明显集中进出"
+                    "当日场内份额增速绝对值 <1%，套利盘未明显集中进出"
                 )
 
             if (np.abs(last3_amount_incr) < 1).all():
                 liquidity_score += 15
                 plus.append(
-                    "近3日份额增速绝对值均<1%，份额结构高度稳定"
+                    "近3日份额增速绝对值均 <1%，份额结构高度稳定"
                 )
 
             # ---------- 扣分条件：套利机会快速消失 ----------
@@ -242,7 +239,7 @@ class LOFArbitrageAnalyzer:
             if amount_incr_today > 3 and is_monotonic_decreasing(last3_premium):
                 liquidity_score -= 20
                 minus.append(
-                    "当日场内份额增速>3% 且溢价率连续回落，套利盘加速撤离"
+                    "当日场内份额增速 >3% 且溢价率连续回落，套利盘加速撤离"
                 )
 
         else:
@@ -467,7 +464,7 @@ def main():
         with col_settings1:
             chart_type = st.radio(
                 "图表显示模式",
-                ["溢价率", "价格", "双轴对比"],
+                ["价格 vs 净值", "溢价率", "价格", "净值"],
                 horizontal=True
             )
         
@@ -486,9 +483,69 @@ def main():
             fig = go.Figure()
             
             # ==========================
-            # 溢价率
+            # 价格 vs 净值
             # ==========================
-            if chart_type == "溢价率":
+            if chart_type == "价格 vs 净值":
+                # 左轴：价格
+                fig.add_trace(go.Scatter(
+                    x=df['price_dt_str'],
+                    y=df['price'],
+                    mode='lines+markers',
+                    name='价格',
+                    line=dict(color='orange', width=2),
+                    yaxis='y'
+                ))
+            
+                # 左轴：基金净值
+                fig.add_trace(go.Scatter(
+                    x=df['price_dt_str'],
+                    y=df['net_value'].fillna(df['est_val']),
+                    mode='lines+markers',
+                    name='净值',
+                    line=dict(color='blue', width=2),
+                    yaxis='y'
+                ))
+            
+                # 右轴：溢价率（柱状）
+                colors = ['red' if v >= 0 else 'green' for v in df['discount_rt']]
+                fig.add_trace(go.Bar(
+                    x=df['price_dt_str'],
+                    y=df['discount_rt'],
+                    name='溢价率(右轴)',
+                    marker_color=colors,
+                    opacity=0.6,
+                    yaxis='y2',
+                    text=df['discount_rt'].round(2),
+                    textposition='outside'
+                ))
+            
+                fig.update_layout(
+                    title=f"{selected_code} 价格 vs 净值",
+                    # 左轴：价格 & 净值（不画网格）
+                    yaxis=dict(
+                        title="价格(元)",
+                        showgrid=False,
+                        zeroline=False
+                    ),
+                
+                    # 右轴：溢价率（唯一的辅助线来源）
+                    yaxis2=dict(
+                        title="溢价率(%)",
+                        overlaying='y',
+                        side='right',
+                        showgrid=True,    # 只画右轴网格
+                        gridcolor='rgba(200,200,200,0.45)',
+                        zeroline=True,
+                        zerolinecolor='rgba(120,120,120,0.6)'
+                    ),
+                    
+                    height=400
+                )
+                
+            # ==========================
+            # 溢价率
+            # ==========================            
+            elif chart_type == "溢价率": 
                 fig.add_trace(go.Scatter(
                     x=df['price_dt_str'],
                     y=df['discount_rt'],
@@ -576,62 +633,47 @@ def main():
                 )
             
             # ==========================
-            # 双轴对比（重点修正）
+            # 净值
             # ==========================
             else:
-                # 左轴：价格
-                fig.add_trace(go.Scatter(
-                    x=df['price_dt_str'],
-                    y=df['price'],
-                    mode='lines+markers',
-                    name='价格',
-                    line=dict(color='orange', width=2),
-                    yaxis='y'
-                ))
-            
-                # 左轴：基金净值
                 fig.add_trace(go.Scatter(
                     x=df['price_dt_str'],
                     y=df['net_value'].fillna(df['est_val']),
                     mode='lines+markers',
                     name='净值',
-                    line=dict(color='blue', width=2),
-                    yaxis='y'
+                    line=dict(color='orange', width=2)
                 ))
             
-                # 右轴：溢价率（柱状）
-                colors = ['red' if v >= 0 else 'green' for v in df['discount_rt']]
-                fig.add_trace(go.Bar(
-                    x=df['price_dt_str'],
-                    y=df['discount_rt'],
-                    name='溢价率(右轴)',
-                    marker_color=colors,
-                    opacity=0.6,
-                    yaxis='y2',
-                    text=df['discount_rt'].round(2),
-                    textposition='outside'
-                ))
+                if show_7d:
+                    fig.add_trace(go.Scatter(
+                        x=df['price_dt_str'],
+                        y=df['net_value'].fillna(df['est_val']).rolling(5).mean(),
+                        mode='lines',
+                        name='5日均线',
+                        line=dict(color='purple', dash='dash')
+                    ))
+            
+                if show_14d:
+                    fig.add_trace(go.Scatter(
+                        x=df['price_dt_str'],
+                        y=df['net_value'].fillna(df['est_val']).rolling(10).mean(),
+                        mode='lines',
+                        name='10日均线',
+                        line=dict(color='brown', dash='dash')
+                    ))
+            
+                if show_21d:
+                    fig.add_trace(go.Scatter(
+                        x=df['price_dt_str'],
+                        y=df['net_value'].fillna(df['est_val']).rolling(15).mean(),
+                        mode='lines',
+                        name='15日均线',
+                        line=dict(color='pink', dash='dash')
+                    ))
             
                 fig.update_layout(
-                    title=f"{selected_code} 价格 vs 净值",
-                    # 左轴：价格 & 净值（不画网格）
-                    yaxis=dict(
-                        title="价格(元)",
-                        showgrid=False,
-                        zeroline=False
-                    ),
-                
-                    # 右轴：溢价率（唯一的辅助线来源）
-                    yaxis2=dict(
-                        title="溢价率(%)",
-                        overlaying='y',
-                        side='right',
-                        showgrid=True,    # 只画右轴网格
-                        gridcolor='rgba(200,200,200,0.45)',
-                        zeroline=True,
-                        zerolinecolor='rgba(120,120,120,0.6)'
-                    ),
-                    
+                    title=f"{selected_code} 净值趋势",
+                    yaxis_title="净值(元)",
                     height=400
                 )
             
@@ -818,7 +860,7 @@ def main():
         st.markdown("### 🔹 申购费")
         st.markdown("""
         - 1.2% – 1.5%  
-        - 通常一折后约 **0.12% – 0.15%**
+        - 场外申购通常一折后约 **0.12% – 0.15%**
         """)
 
         st.markdown("### 🔹 赎回费")
@@ -829,7 +871,7 @@ def main():
 
         st.markdown("### 🔹 交易成本")
         st.markdown("""
-        - 场内买卖佣金：万分之一（0.01%）  
+        - 场内买卖佣金：万分之一起（0.01%）  
         - 最低收费：0.2 元起
         """)
 
