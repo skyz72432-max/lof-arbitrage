@@ -502,7 +502,7 @@ def main():
                     y=df['net_value'].fillna(df['est_val']),
                     mode='lines+markers',
                     name='净值',
-                    line=dict(color='blue', width=2),
+                    line=dict(color='#C49A6C', width=2),
                     yaxis='y'
                 ))
             
@@ -605,7 +605,7 @@ def main():
                         y=df['price'].rolling(5).mean(),
                         mode='lines',
                         name='5日均线',
-                        line=dict(color='purple', dash='dash')
+                        line=dict(color='red', dash='dash')
                     ))
             
                 if show_14d:
@@ -614,7 +614,7 @@ def main():
                         y=df['price'].rolling(10).mean(),
                         mode='lines',
                         name='10日均线',
-                        line=dict(color='brown', dash='dash')
+                        line=dict(color='green', dash='dash')
                     ))
             
                 if show_21d:
@@ -623,7 +623,7 @@ def main():
                         y=df['price'].rolling(15).mean(),
                         mode='lines',
                         name='15日均线',
-                        line=dict(color='pink', dash='dash')
+                        line=dict(color='orange', dash='dash')
                     ))
             
                 fig.update_layout(
@@ -641,7 +641,7 @@ def main():
                     y=df['net_value'].fillna(df['est_val']),
                     mode='lines+markers',
                     name='净值',
-                    line=dict(color='orange', width=2)
+                    line=dict(color='#C49A6C', width=2)
                 ))
             
                 if show_7d:
