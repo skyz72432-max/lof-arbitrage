@@ -492,7 +492,7 @@ def main():
                     y=df['price'],
                     mode='lines+markers',
                     name='价格',
-                    line=dict(color='#8C564B', width=2),
+                    line=dict(color='#FF6F61', width=2),
                     yaxis='y'
                 ))
             
@@ -596,7 +596,7 @@ def main():
                     y=df['price'],
                     mode='lines+markers',
                     name='价格',
-                    line=dict(color='#8C564B', width=2)
+                    line=dict(color='#FF6F61', width=2)
                 ))
             
                 if show_7d:
