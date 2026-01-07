@@ -502,7 +502,7 @@ def main():
                     y=df['net_value'].fillna(df['est_val']),
                     mode='lines+markers',
                     name='净值',
-                    line=dict(color='#6F63D2', width=2),
+                    line=dict(color='#8b5a2b', width=2),
                     yaxis='y'
                 ))
             
@@ -641,7 +641,7 @@ def main():
                     y=df['net_value'].fillna(df['est_val']),
                     mode='lines+markers',
                     name='净值',
-                    line=dict(color='#6F63D2', width=2)
+                    line=dict(color='#8b5a2b', width=2)
                 ))
             
                 if show_7d:
