@@ -13,7 +13,7 @@ from streamlit_autorefresh import st_autorefresh
 
 warnings.filterwarnings("ignore")
 
-APP_VERSION = "2026-01-15 03:35 UTC"
+APP_VERSION = "2026-01-15 05:28 UTC"
 
 def get_project_root() -> str:
     """当前脚本所在目录的父目录"""
